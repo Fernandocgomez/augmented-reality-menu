@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "form-builder": "apps/form-builder",
+    "form-builder-e2e": "apps/form-builder-e2e"
+  }
+}
