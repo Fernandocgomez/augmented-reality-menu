@@ -1,6 +1,6 @@
 {
+  "name": "form-builder",
   "projectType": "application",
-  "root": "apps/form-builder",
   "sourceRoot": "apps/form-builder/src",
   "prefix": "visual-form-builder",
   "targets": {
@@ -64,7 +64,10 @@
           "browserTarget": "form-builder:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/form-builder/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
