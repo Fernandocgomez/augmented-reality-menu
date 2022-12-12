@@ -4,9 +4,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { MongooseModule } from '@nestjs/mongoose'
+import { UserModule } from '../modules/user/user.module';
 
 @Module({
   imports: [
+    UserModule,
     MongooseModule.forRoot('mongodb://localhost/demo'),
   ],
   controllers: [AppController],
