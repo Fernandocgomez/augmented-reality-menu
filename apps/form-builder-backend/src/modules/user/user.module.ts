@@ -8,8 +8,11 @@ import { UserController } from './user.controller';
 
 import mongooseUniqueValidatorPlugin = require('mongoose-unique-validator');
 
+import { BcryptModule } from '../bcrypt/bcrypt.module';
+
 @Module({
   imports: [
+    BcryptModule,
     MongooseModule.forFeatureAsync([
       {
         name: User.name,
@@ -21,9 +24,9 @@ import mongooseUniqueValidatorPlugin = require('mongoose-unique-validator');
           return schema;
         }
       },
-    ]),
+    ]) 
   ],
-  providers: [UserRepository, UserService],
+  providers: [UserService, UserRepository],
   controllers: [UserController],
 })
 export class UserModule {}
