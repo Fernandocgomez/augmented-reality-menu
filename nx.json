@@ -1,5 +1,5 @@
 {
-  "npmScope": "visual-form-builder",
+  "npmScope": "augmented-reality-menu",
   "affected": {
     "defaultBase": "master"
   },
@@ -37,7 +37,6 @@
       "style": "scss"
     }
   },
-  "defaultProject": "form-builder",
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "build": {
