@@ -4,6 +4,6 @@
     "form-builder": "apps/form-builder",
     "form-builder-backend": "apps/form-builder-backend",
     "form-builder-e2e": "apps/form-builder-e2e",
-    "user": "libs/user"
+    "nestjs-user": "libs/nestjs/user"
   }
 }

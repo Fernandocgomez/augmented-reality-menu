@@ -1,20 +1,20 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/user/src",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/nestjs/user/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/user/**/*.ts"]
+        "lintFilePatterns": ["libs/nestjs/user/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/user"],
+      "outputs": ["coverage/libs/nestjs/user"],
       "options": {
-        "jestConfig": "libs/user/jest.config.ts",
+        "jestConfig": "libs/nestjs/user/jest.config.ts",
         "passWithNoTests": true
       }
     }

@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
-  displayName: 'user',
-  preset: '../../jest.preset.js',
+  displayName: 'nestjs-user',
+  preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -12,5 +12,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/libs/user',
+  coverageDirectory: '../../../coverage/libs/nestjs/user',
 };

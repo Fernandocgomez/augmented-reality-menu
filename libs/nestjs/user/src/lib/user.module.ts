@@ -19,9 +19,9 @@ import mongooseUniqueValidatorPlugin = require('mongoose-unique-validator');
           schema.plugin(mongooseUniqueValidatorPlugin);
 
           return schema;
-        }
+        },
       },
-    ]) 
+    ]),
   ],
   controllers: [UserController],
   providers: [UserService, UserRepository],
