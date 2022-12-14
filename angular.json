@@ -3,6 +3,8 @@
   "projects": {
     "form-builder": "apps/form-builder",
     "form-builder-backend": "apps/form-builder-backend",
-    "form-builder-e2e": "apps/form-builder-e2e"
+    "form-builder-e2e": "apps/form-builder-e2e",
+    "nestjs-bcrypt": "libs/nestjs/bcrypt",
+    "nestjs-user": "libs/nestjs/user"
   }
 }
