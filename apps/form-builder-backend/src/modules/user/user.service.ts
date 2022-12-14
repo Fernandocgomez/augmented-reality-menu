@@ -5,15 +5,19 @@ import { UserRepository } from './user.repository';
 
 import { v4 as uuidv4 } from 'uuid';
 
+import { BcryptService } from '../bcrypt/bcrypt.service';
+
 @Injectable()
 export class UserService {
-    constructor(private readonly userRepository: UserRepository) {}
+    constructor(private readonly userRepository: UserRepository, private readonly bcryptService: BcryptService) {}
 
     async createUser(username: string, password: string): Promise<User> {
+        const hashedPassword = await this.bcryptService.hash(password);
+
         return this.userRepository.createUser({
             userId: uuidv4(),
             username,
-            password
+            password: hashedPassword
         });
     }
 }
