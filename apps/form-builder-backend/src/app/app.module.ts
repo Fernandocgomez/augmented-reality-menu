@@ -4,7 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { MongooseModule } from '@nestjs/mongoose'
-import { UserModule } from '../modules/user/user.module';
+import { UserModule } from '@visual-form-builder/user';
 
 @Module({
   imports: [
