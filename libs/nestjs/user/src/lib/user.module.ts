@@ -8,7 +8,7 @@ import { UserController } from './user.controller';
 
 import mongooseUniqueValidatorPlugin = require('mongoose-unique-validator');
 
-import { BcryptModule } from '@visual-form-builder/nestjs-bcrypt';
+import { BcryptModule } from '@augmented-reality-menu/nestjs-bcrypt';
 
 @Module({
   imports: [
