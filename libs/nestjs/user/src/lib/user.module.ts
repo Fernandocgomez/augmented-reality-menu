@@ -8,6 +8,8 @@ import { UserController } from './user.controller';
 
 import mongooseUniqueValidatorPlugin = require('mongoose-unique-validator');
 
+import { BcryptModule } from '@visual-form-builder/nestjs-bcrypt';
+
 @Module({
   imports: [
     MongooseModule.forFeatureAsync([
@@ -22,6 +24,7 @@ import mongooseUniqueValidatorPlugin = require('mongoose-unique-validator');
         },
       },
     ]),
+    BcryptModule,
   ],
   controllers: [UserController],
   providers: [UserService, UserRepository],

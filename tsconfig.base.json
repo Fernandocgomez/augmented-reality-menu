@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@visual-form-builder/nestjs-bcrypt": ["libs/nestjs/bcrypt/src/index.ts"],
       "@visual-form-builder/nestjs-user": ["libs/nestjs/user/src/index.ts"]
     }
   },
