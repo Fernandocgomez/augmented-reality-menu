@@ -4,7 +4,7 @@ import { User } from './schemas/user.schema';
 import { UserRepository } from './user.repository';
 
 import { v4 as uuidv4 } from 'uuid';
-import { BcryptService } from '@augmented-reality-menu/nestjs-bcrypt';
+import { BcryptService } from '@xreats/nestjs-bcrypt';
 
 @Injectable()
 export class UserService {

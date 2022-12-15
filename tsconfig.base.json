@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@augmented-reality-menu/nestjs-bcrypt": [
+      "@xreats/nestjs-bcrypt": [
         "libs/nestjs/bcrypt/src/index.ts"
       ],
-      "@augmented-reality-menu/nestjs-user": ["libs/nestjs/user/src/index.ts"]
+      "@xreats/nestjs-user": ["libs/nestjs/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

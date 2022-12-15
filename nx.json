@@ -1,5 +1,5 @@
 {
-  "npmScope": "augmented-reality-menu",
+  "npmScope": "xreats",
   "affected": {
     "defaultBase": "master"
   },
@@ -42,5 +42,6 @@
     "build": {
       "dependsOn": ["^build"]
     }
-  }
+  },
+  "defaultProject": "xreats-backend"
 }
