@@ -7,10 +7,10 @@ import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class RestaurantOwnerRepository {
-    constructor(@InjectModel(RestaurantOwner.name) private userModel: Model<RestaurantOwnerDocument>) { }
+    constructor(@InjectModel(RestaurantOwner.name) private restaurantOwnerModel: Model<RestaurantOwnerDocument>) { }
 
     async createRestaurantOwner(restaurantOwner: RestaurantOwner): Promise<RestaurantOwner> {
-        const newRestaurantOwner = new this.userModel(restaurantOwner);
+        const newRestaurantOwner = new this.restaurantOwnerModel(restaurantOwner);
 
         return newRestaurantOwner.save().catch((e) => {
             throw new HttpException(
@@ -22,5 +22,21 @@ export class RestaurantOwnerRepository {
                 { cause: new Error(e) }
             );
         });
+    }
+
+    async findRestaurantOwnerById(id: string): Promise<RestaurantOwner> {
+        const restaurantOwner = await this.restaurantOwnerModel.findOne({ id: id });
+
+        if (!restaurantOwner) {
+            throw new HttpException(
+                {
+                    statusCode: HttpStatus.NOT_FOUND,
+                    message: `Restaurant owner with id:${id} not found`
+                },
+                HttpStatus.NOT_FOUND
+            )
+        }
+
+        return restaurantOwner;
     }
 }

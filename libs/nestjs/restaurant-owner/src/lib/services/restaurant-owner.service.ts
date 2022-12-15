@@ -6,6 +6,7 @@ import { RestaurantOwnerRepository } from '../repositories/restaurant-owner.repo
 import { RestaurantOwnerCreatedDto } from '../dtos/restaurant-owner-created.dto';
 
 import { BcryptService } from '@xreats/nestjs-bcrypt';
+import { RestaurantOwnerRetrievedDto } from '../dtos/restaurant-owner-retrieved.dto';
 
 @Injectable()
 export class RestaurantOwnerService {
@@ -25,4 +26,10 @@ export class RestaurantOwnerService {
 
         return { id: restaurantOwner.id, username: restaurantOwner.username };
     }
+
+    async findRestaurantOwnerById(id: string): Promise<RestaurantOwnerRetrievedDto> {
+        const restaurantOwner = await this.restaurantOwnerRepository.findRestaurantOwnerById(id);
+
+        return { id: restaurantOwner.id, username: restaurantOwner.username };
+    } 
 }
