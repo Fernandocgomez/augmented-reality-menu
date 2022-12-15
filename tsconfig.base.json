@@ -15,8 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@xreats/nestjs-bcrypt": [
-        "libs/nestjs/bcrypt/src/index.ts"
+      "@xreats/nestjs-bcrypt": ["libs/nestjs/bcrypt/src/index.ts"],
+      "@xreats/nestjs-restaurant-owner": [
+        "libs/nestjs/restaurant-owner/src/index.ts"
       ],
       "@xreats/nestjs-user": ["libs/nestjs/user/src/index.ts"]
     }
