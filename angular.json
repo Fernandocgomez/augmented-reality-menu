@@ -3,7 +3,6 @@
   "projects": {
     "nestjs-bcrypt": "libs/nestjs/bcrypt",
     "nestjs-restaurant-owner": "libs/nestjs/restaurant-owner",
-    "nestjs-user": "libs/nestjs/user",
     "xreats-backend": "apps/xreats-backend"
   }
 }
