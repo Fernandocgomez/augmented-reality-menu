@@ -8,6 +8,8 @@ import { RestaurantOwnerRepository } from './repositories/restaurant-owner.repos
 import { RestaurantOwner, RestaurantOwnerSchema } from './schemas/restaurant-owner.schema';
 import { RestaurantOwnerService } from './services/restaurant-owner.service';
 
+import { BcryptModule } from '@xreats/nestjs-bcrypt';
+
 @Module({
   imports: [
     MongooseModule.forFeatureAsync([
@@ -22,6 +24,7 @@ import { RestaurantOwnerService } from './services/restaurant-owner.service';
         },
       },
     ]),
+    BcryptModule
   ],
   controllers: [RestaurantOwnerController],
   providers: [RestaurantOwnerService, RestaurantOwnerRepository],
