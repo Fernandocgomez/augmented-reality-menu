@@ -8,6 +8,7 @@ import { RestaurantOwnerRetrievedDto } from '../dtos/restaurant-owner-retrieved.
 import { RestaurantOwnerUpdatedDto } from '../dtos/restaurant-owner-updated.dto';
 import { UpdateRestaurantOwnerDto } from '../dtos/update-restaurant-owner.dto';
 import { RestaurantOwnerCreatedDto } from '../dtos/restaurant-owner-created.dto';
+import { RestaurantOwnerDeleted } from '../dtos/restaurant-owner-deleted.dto';
 
 import { RestaurantOwnerRepository } from '../repositories/restaurant-owner.repository';
 
@@ -36,10 +37,7 @@ export class RestaurantOwnerService {
         return { id: restaurantOwner.id, username: restaurantOwner.username };
     } 
 
-    async updateRestaurantOwner(
-        restaurantOwnerId: string, 
-        updateRestaurantOwnerDto: UpdateRestaurantOwnerDto
-    ): Promise<RestaurantOwnerUpdatedDto> {
+    async updateRestaurantOwner(restaurantOwnerId: string, updateRestaurantOwnerDto: UpdateRestaurantOwnerDto): Promise<RestaurantOwnerUpdatedDto> {
         let updateRestaurantOwnerDtoCopy = {...updateRestaurantOwnerDto};
 
         if(updateRestaurantOwnerDtoCopy?.password) {
@@ -57,6 +55,13 @@ export class RestaurantOwnerService {
         );
 
         return { id: updatedRestaurantOwner.id, username: updatedRestaurantOwner.username };
+    }
+
+    
+    async deleteRestaurantOwner(id: string): Promise<RestaurantOwnerDeleted> {
+        const deletedRestaurantOwner = await this.restaurantOwnerRepository.deleteRestaurantOwnerById(id);
+
+        return { id: deletedRestaurantOwner.id, username: deletedRestaurantOwner.username };
     }
 
     private async hashPassword(password: string): Promise<string> {

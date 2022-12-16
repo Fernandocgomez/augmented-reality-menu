@@ -16,34 +16,51 @@ export class RestaurantOwnerRepository {
             throw new HttpException(
                 {
                     statusCode: HttpStatus.BAD_REQUEST,
-                    message: `Username '${e.errors.username.value}' is already taken.`,
+                    message: `Username '${e.errors.username.value}' already exist.`,
                 },
-                HttpStatus.BAD_REQUEST,
-                { cause: new Error(e) }
+                HttpStatus.BAD_REQUEST
             );
         });
     }
 
     async findRestaurantOwnerById(id: string): Promise<RestaurantOwner> {
-        const restaurantOwner = await this.restaurantOwnerModel.findOne({ id: id });
+        const restaurantOwner = await this.restaurantOwnerModel.findOne({ id });
 
         if (!restaurantOwner) {
-            throw new HttpException(
-                {
-                    statusCode: HttpStatus.NOT_FOUND,
-                    message: `Restaurant owner with id:${id} not found`
-                },
-                HttpStatus.NOT_FOUND
-            )
+            this.throwNotFoundException();
         }
 
         return restaurantOwner;
     }
 
-    async updateRestaurantOwnerById(
-        restaurantOwnerQuery: FilterQuery<RestaurantOwner>,
-        partialRestaurantOwner: Partial<RestaurantOwner>
-    ): Promise<RestaurantOwner> {
-        return this.restaurantOwnerModel.findOneAndUpdate(restaurantOwnerQuery, partialRestaurantOwner, { new: true });
+    async updateRestaurantOwnerById(restaurantOwnerQuery: FilterQuery<RestaurantOwner>, partialRestaurantOwner: Partial<RestaurantOwner>): Promise<RestaurantOwner> {
+        const restaurantOwner = await this.restaurantOwnerModel.findOneAndUpdate(restaurantOwnerQuery, partialRestaurantOwner, { new: true });
+    
+        if (!restaurantOwner) {
+            this.throwNotFoundException();
+        }
+
+        return restaurantOwner;
     }
+
+    async deleteRestaurantOwnerById(id: string): Promise<RestaurantOwner> {
+        const restaurantOwner = await this.restaurantOwnerModel.findOneAndDelete({ id });
+
+        if (!restaurantOwner) {
+            this.throwNotFoundException();
+        }
+    
+        return restaurantOwner;
+    }
+
+    private throwNotFoundException() {
+        throw new HttpException(
+            {
+                statusCode: HttpStatus.NOT_FOUND,
+                message: `Restaurant owner not found`
+            },
+            HttpStatus.NOT_FOUND
+        )
+    }
+    
 }
