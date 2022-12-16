@@ -10,6 +10,7 @@ export class RestaurantOwner {
 
   @Prop({
     unique: true,
+    immutable: true
   })
   username: string;
 
