@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { RestaurantOwner, RestaurantOwnerDocument } from '../schemas/restaurant-owner.schema';
 
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
@@ -38,5 +38,12 @@ export class RestaurantOwnerRepository {
         }
 
         return restaurantOwner;
+    }
+
+    async updateRestaurantOwnerById(
+        restaurantOwnerQuery: FilterQuery<RestaurantOwner>,
+        partialRestaurantOwner: Partial<RestaurantOwner>
+    ): Promise<RestaurantOwner> {
+        return this.restaurantOwnerModel.findOneAndUpdate(restaurantOwnerQuery, partialRestaurantOwner, { new: true });
     }
 }
