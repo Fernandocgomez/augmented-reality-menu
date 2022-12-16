@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@xreats/nestjs-auth": ["libs/nestjs/auth/src/index.ts"],
       "@xreats/nestjs-bcrypt": ["libs/nestjs/bcrypt/src/index.ts"],
       "@xreats/nestjs-restaurant-owner": [
         "libs/nestjs/restaurant-owner/src/index.ts"
