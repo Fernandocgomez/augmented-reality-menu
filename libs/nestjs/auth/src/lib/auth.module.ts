@@ -9,6 +9,14 @@ import { LocalStrategy } from './passport-strategies/local.strategy';
 import { JwtStrategy } from './passport-strategies/jwt.strategy';
 
 import { RestaurantOwnerModule } from '@xreats/nestjs-restaurant-owner';
+import { JwtAuthGuard } from '@xreats/shared';
+
+import { APP_GUARD } from '@nestjs/core';
+
+const GlobalJwtAuthGuard = {
+  provide: APP_GUARD,
+  useClass: JwtAuthGuard,
+};
 
 @Module({
   imports: [
@@ -21,7 +29,12 @@ import { RestaurantOwnerModule } from '@xreats/nestjs-restaurant-owner';
     }
   })],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [
+    AuthService, 
+    LocalStrategy, 
+    JwtStrategy,
+    GlobalJwtAuthGuard
+  ],
 })
 
 export class AuthModule {}
