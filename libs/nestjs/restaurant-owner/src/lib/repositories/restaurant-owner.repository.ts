@@ -33,6 +33,16 @@ export class RestaurantOwnerRepository {
         return restaurantOwner;
     }
 
+    async findRestaurantOwnerByUsername(username: string): Promise<RestaurantOwner> {
+        const restaurantOwner = await this.restaurantOwnerModel.findOne({ username });
+
+        if (!restaurantOwner) {
+            this.throwNotFoundException();
+        }
+
+        return restaurantOwner;
+    }
+
     async updateRestaurantOwnerById(restaurantOwnerQuery: FilterQuery<RestaurantOwner>, partialRestaurantOwner: Partial<RestaurantOwner>): Promise<RestaurantOwner> {
         const restaurantOwner = await this.restaurantOwnerModel.findOneAndUpdate(restaurantOwnerQuery, partialRestaurantOwner, { new: true });
     

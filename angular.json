@@ -1,8 +1,10 @@
 {
   "version": 2,
   "projects": {
+    "nestjs-auth": "libs/nestjs/auth",
     "nestjs-bcrypt": "libs/nestjs/bcrypt",
     "nestjs-restaurant-owner": "libs/nestjs/restaurant-owner",
+    "shared": "libs/shared",
     "xreats-backend": "apps/xreats-backend"
   }
 }

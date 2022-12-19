@@ -9,6 +9,7 @@ import { RestaurantOwnerUpdatedDto } from '../dtos/restaurant-owner-updated.dto'
 import { UpdateRestaurantOwnerDto } from '../dtos/update-restaurant-owner.dto';
 import { RestaurantOwnerCreatedDto } from '../dtos/restaurant-owner-created.dto';
 import { RestaurantOwnerDeleted } from '../dtos/restaurant-owner-deleted.dto';
+import { RestaurantOwner } from '../schemas/restaurant-owner.schema';
 
 import { RestaurantOwnerRepository } from '../repositories/restaurant-owner.repository';
 
@@ -35,7 +36,11 @@ export class RestaurantOwnerService {
         const restaurantOwner = await this.restaurantOwnerRepository.findRestaurantOwnerById(id);
 
         return { id: restaurantOwner.id, username: restaurantOwner.username };
-    } 
+    }
+    
+    async findRestaurantOwnerByUsername(username: string): Promise<RestaurantOwner> {
+        return await this.restaurantOwnerRepository.findRestaurantOwnerByUsername(username);
+    }
 
     async updateRestaurantOwner(restaurantOwnerId: string, updateRestaurantOwnerDto: UpdateRestaurantOwnerDto): Promise<RestaurantOwnerUpdatedDto> {
         let updateRestaurantOwnerDtoCopy = {...updateRestaurantOwnerDto};
@@ -56,12 +61,15 @@ export class RestaurantOwnerService {
 
         return { id: updatedRestaurantOwner.id, username: updatedRestaurantOwner.username };
     }
-
     
     async deleteRestaurantOwner(id: string): Promise<RestaurantOwnerDeleted> {
         const deletedRestaurantOwner = await this.restaurantOwnerRepository.deleteRestaurantOwnerById(id);
 
         return { id: deletedRestaurantOwner.id, username: deletedRestaurantOwner.username };
+    }
+
+    async compareRawPasswordWithHashedPassword(rawPassword: string, hashedPassword: string): Promise<boolean> {
+        return this.bcryptService.compare(rawPassword, hashedPassword);
     }
 
     private async hashPassword(password: string): Promise<string> {
