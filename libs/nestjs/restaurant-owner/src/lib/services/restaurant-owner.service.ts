@@ -68,6 +68,10 @@ export class RestaurantOwnerService {
         return { id: deletedRestaurantOwner.id, username: deletedRestaurantOwner.username };
     }
 
+    async compareRawPasswordWithHashedPassword(rawPassword: string, hashedPassword: string): Promise<boolean> {
+        return this.bcryptService.compare(rawPassword, hashedPassword);
+    }
+
     private async hashPassword(password: string): Promise<string> {
         return await this.bcryptService.hash(password);
     }

@@ -1,5 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes, ValidationPipe } from "@nestjs/common";
 
+import { SkipJwtAuthGuard } from "@xreats/shared";
+
 import { CreateRestaurantOwnerDto } from "../dtos/create-restaurant-owner.dto";
 import { RestaurantOwnerCreatedDto } from "../dtos/restaurant-owner-created.dto";
 import { RestaurantOwnerDeleted } from "../dtos/restaurant-owner-deleted.dto";
@@ -16,6 +18,7 @@ export class RestaurantOwnerController {
 
     @Post()
     @UsePipes(ValidationPipe)
+    @SkipJwtAuthGuard()
     async createRestaurantOwner(@Body() createRestaurantOwnerDto: CreateRestaurantOwnerDto): Promise<RestaurantOwnerCreatedDto> {
         const { username, password } = createRestaurantOwnerDto;
 

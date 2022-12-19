@@ -24,9 +24,13 @@ import { BcryptModule } from '@xreats/nestjs-bcrypt';
         },
       },
     ]),
-    BcryptModule
+    BcryptModule,
   ],
   controllers: [RestaurantOwnerController],
-  providers: [RestaurantOwnerService, RestaurantOwnerRepository],
+  providers: [
+    RestaurantOwnerService,
+    RestaurantOwnerRepository,
+  ],
+  exports: [RestaurantOwnerService]
 })
 export class RestaurantOwnerModule { }
