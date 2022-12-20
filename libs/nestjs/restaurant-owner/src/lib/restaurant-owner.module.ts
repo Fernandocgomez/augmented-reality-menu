@@ -10,7 +10,10 @@ import mongooseUniqueValidatorPlugin = require('mongoose-unique-validator');
 import { RestaurantOwnerController } from './controllers/restaurant-owner.controller';
 import { AuthController } from './controllers/auth.controller';
 
-import { RestaurantOwner, RestaurantOwnerSchema } from './schemas/restaurant-owner.schema';
+import {
+  RestaurantOwner,
+  RestaurantOwnerSchema,
+} from './schemas/restaurant-owner.schema';
 
 import { RestaurantOwnerService } from './services/restaurant-owner.service';
 import { AuthService } from './services/auth.service';
@@ -21,7 +24,7 @@ import { BcryptModule } from '@xreats/nestjs-bcrypt';
 import { LocalStrategy } from './passport-strategies/local.strategy';
 import { JwtStrategy } from './passport-strategies/jwt.strategy';
 
-import { JwtAuthGuard } from '@xreats/shared';
+import { JwtAuthGuard } from '@xreats/nestjs-shared';
 
 const GlobalJwtAuthGuard = {
   provide: APP_GUARD,
@@ -45,8 +48,8 @@ const GlobalJwtAuthGuard = {
     JwtModule.register({
       secret: process.env.NX_JWT_SECRET,
       signOptions: {
-        expiresIn: '7d'
-      }
+        expiresIn: '7d',
+      },
     }),
     BcryptModule,
     PassportModule,
@@ -58,7 +61,7 @@ const GlobalJwtAuthGuard = {
     AuthService,
     LocalStrategy,
     JwtStrategy,
-    GlobalJwtAuthGuard
-  ]
+    GlobalJwtAuthGuard,
+  ],
 })
-export class RestaurantOwnerModule { }
+export class RestaurantOwnerModule {}

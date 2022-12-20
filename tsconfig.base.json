@@ -20,8 +20,8 @@
       "@xreats/nestjs-restaurant-owner": [
         "libs/nestjs/restaurant-owner/src/index.ts"
       ],
-      "@xreats/nestjs-user": ["libs/nestjs/user/src/index.ts"],
-      "@xreats/shared": ["libs/shared/src/index.ts"]
+      "@xreats/nestjs-shared": ["libs/nestjs/shared/src/index.ts"],
+      "@xreats/nestjs-user": ["libs/nestjs/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
