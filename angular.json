@@ -3,6 +3,8 @@
   "projects": {
     "nestjs-bcrypt": "libs/nestjs/bcrypt",
     "nestjs-restaurant-owner": "libs/nestjs/restaurant-owner",
+    "restaurant-owner-dashboard": "apps/restaurant-owner-dashboard",
+    "restaurant-owner-dashboard-e2e": "apps/restaurant-owner-dashboard-e2e",
     "shared": "libs/shared",
     "xreats-backend": "apps/xreats-backend"
   }
