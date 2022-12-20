@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { RestaurantOwnerService } from '@xreats/nestjs-restaurant-owner';
+import { JsonWebTokenDto } from '../dtos/json-web-token.dto';
+import { RestaurantOwnerLoggedInDto } from '../dtos/restaurant-owner-logged-in.dto';
 
-import { JsonWebTokenDto } from './dtos/json-web-token.dto';
-import { RestaurantOwnerLoggedInDto } from './dtos/restaurant-owner-logged-in.dto';
+import { RestaurantOwnerService } from './restaurant-owner.service';
 
 @Injectable()
 export class AuthService {

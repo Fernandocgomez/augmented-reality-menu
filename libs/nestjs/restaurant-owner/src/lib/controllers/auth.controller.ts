@@ -2,12 +2,13 @@ import { Controller, Post, Request, UseGuards } from "@nestjs/common";
 
 import { SkipJwtAuthGuard } from "@xreats/shared";
 
-import { AuthService } from "./auth.service";
+import { JsonWebTokenDto } from "../dtos/json-web-token.dto";
+import { RestaurantOwnerLoggedInDto } from "../dtos/restaurant-owner-logged-in.dto";
 
-import { JsonWebTokenDto } from "./dtos/json-web-token.dto";
-import { RestaurantOwnerLoggedInDto } from "./dtos/restaurant-owner-logged-in.dto";
+import { LocalAuthGuard } from "../guards/local-auth.guard";
 
-import { LocalAuthGuard } from "./guard/local-auth.guard";
+import { AuthService } from "../services/auth.service";
+
 
 @Controller('auth')
 export class AuthController {
