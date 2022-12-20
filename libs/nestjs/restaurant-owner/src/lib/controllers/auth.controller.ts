@@ -1,25 +1,24 @@
-import { Controller, Post, Request, UseGuards } from "@nestjs/common";
+import { Controller, Post, Request, UseGuards } from '@nestjs/common';
 
-import { SkipJwtAuthGuard } from "@xreats/shared";
+import { SkipJwtAuthGuard } from '@xreats/nestjs-shared';
 
-import { JsonWebTokenDto } from "../dtos/json-web-token.dto";
-import { RestaurantOwnerLoggedInDto } from "../dtos/restaurant-owner-logged-in.dto";
+import { JsonWebTokenDto } from '../dtos/json-web-token.dto';
+import { RestaurantOwnerLoggedInDto } from '../dtos/restaurant-owner-logged-in.dto';
 
-import { LocalAuthGuard } from "../guards/local-auth.guard";
+import { LocalAuthGuard } from '../guards/local-auth.guard';
 
-import { AuthService } from "../services/auth.service";
-
+import { AuthService } from '../services/auth.service';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
-    @SkipJwtAuthGuard()
-    @UseGuards(LocalAuthGuard)
-    @Post('login')
-    async login(@Request() req): Promise<JsonWebTokenDto> {
-        const user: RestaurantOwnerLoggedInDto = req.user;
+  @SkipJwtAuthGuard()
+  @UseGuards(LocalAuthGuard)
+  @Post('login')
+  async login(@Request() req): Promise<JsonWebTokenDto> {
+    const user: RestaurantOwnerLoggedInDto = req.user;
 
-        return this.authService.getJsonWebToken(user);
-    }
+    return this.authService.getJsonWebToken(user);
+  }
 }
