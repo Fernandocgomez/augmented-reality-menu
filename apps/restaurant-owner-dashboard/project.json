@@ -1,0 +1,96 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/restaurant-owner-dashboard/src",
+  "prefix": "xreats",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/restaurant-owner-dashboard",
+        "index": "apps/restaurant-owner-dashboard/src/index.html",
+        "main": "apps/restaurant-owner-dashboard/src/main.ts",
+        "polyfills": "apps/restaurant-owner-dashboard/src/polyfills.ts",
+        "tsConfig": "apps/restaurant-owner-dashboard/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/restaurant-owner-dashboard/src/favicon.ico",
+          "apps/restaurant-owner-dashboard/src/assets"
+        ],
+        "styles": ["apps/restaurant-owner-dashboard/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/restaurant-owner-dashboard/src/environments/environment.ts",
+              "with": "apps/restaurant-owner-dashboard/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "restaurant-owner-dashboard:build:production"
+        },
+        "development": {
+          "browserTarget": "restaurant-owner-dashboard:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/restaurant-owner-dashboard/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "restaurant-owner-dashboard:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/restaurant-owner-dashboard/**/*.ts",
+          "apps/restaurant-owner-dashboard/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/restaurant-owner-dashboard"],
+      "options": {
+        "jestConfig": "apps/restaurant-owner-dashboard/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
