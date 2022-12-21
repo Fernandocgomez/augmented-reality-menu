@@ -1,4 +1,5 @@
 {
+  "name": "nestjs-bcrypt",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/nestjs/bcrypt/src",
   "projectType": "library",
@@ -12,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/nestjs/bcrypt"],
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/bcrypt"],
       "options": {
         "jestConfig": "libs/nestjs/bcrypt/jest.config.ts",
         "passWithNoTests": true

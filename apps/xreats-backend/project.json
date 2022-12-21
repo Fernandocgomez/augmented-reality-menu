@@ -1,16 +1,19 @@
 {
+  "name": "xreats-backend",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/xreats-backend/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/xreats-backend",
         "main": "apps/xreats-backend/src/main.ts",
         "tsConfig": "apps/xreats-backend/tsconfig.app.json",
-        "assets": ["apps/xreats-backend/src/assets"]
+        "assets": ["apps/xreats-backend/src/assets"],
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "production": {
@@ -46,7 +49,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/xreats-backend"],
+      "outputs": ["{workspaceRoot}/coverage/apps/xreats-backend"],
       "options": {
         "jestConfig": "apps/xreats-backend/jest.config.ts",
         "passWithNoTests": true

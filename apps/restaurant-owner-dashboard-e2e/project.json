@@ -1,4 +1,5 @@
 {
+  "name": "restaurant-owner-dashboard-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/restaurant-owner-dashboard-e2e/src",
   "projectType": "application",
