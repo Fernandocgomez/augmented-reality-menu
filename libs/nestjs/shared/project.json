@@ -6,14 +6,20 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/nestjs/shared/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/nestjs/shared/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/shared"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/nestjs/shared"
+      ],
       "options": {
         "jestConfig": "libs/nestjs/shared/jest.config.ts",
         "passWithNoTests": true

@@ -6,14 +6,20 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/nestjs/bcrypt/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/nestjs/bcrypt/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/bcrypt"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/nestjs/bcrypt"
+      ],
       "options": {
         "jestConfig": "libs/nestjs/bcrypt/jest.config.ts",
         "passWithNoTests": true
