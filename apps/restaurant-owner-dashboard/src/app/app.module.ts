@@ -12,11 +12,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 
+import { AppRoutingModule } from './app-routing.module';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
+  BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(
       {},
