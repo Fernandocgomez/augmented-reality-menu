@@ -1,11 +1,14 @@
 {
+  "name": "restaurant-owner-dashboard",
   "projectType": "application",
   "sourceRoot": "apps/restaurant-owner-dashboard/src",
-  "prefix": "rod",
+  "prefix": "xreats",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/restaurant-owner-dashboard",
         "index": "apps/restaurant-owner-dashboard/src/index.html",
@@ -17,7 +20,10 @@
           "apps/restaurant-owner-dashboard/src/favicon.ico",
           "apps/restaurant-owner-dashboard/src/assets"
         ],
-        "styles": ["apps/restaurant-owner-dashboard/src/styles.scss"],
+        "styles": [
+          "@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/restaurant-owner-dashboard/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -85,7 +91,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/restaurant-owner-dashboard"],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/restaurant-owner-dashboard"
+      ],
       "options": {
         "jestConfig": "apps/restaurant-owner-dashboard/jest.config.ts",
         "passWithNoTests": true
