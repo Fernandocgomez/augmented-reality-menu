@@ -4,12 +4,14 @@ import { RouterModule } from '@angular/router';
 import { loginRoutes } from './lib.routes';
 import { LoginComponent } from './login.component';
 import { LoginDataAccessModule } from '@xreats/login-access-data';
+import { UiNavigationModule } from '@xreats/ui/navigation';
 
 @NgModule({
   imports: [
     CommonModule, 
     RouterModule.forChild(loginRoutes),
-    LoginDataAccessModule
+    LoginDataAccessModule,
+    UiNavigationModule
   ],
   declarations: [LoginComponent],
 })
