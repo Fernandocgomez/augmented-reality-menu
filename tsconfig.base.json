@@ -15,6 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@xreats/feature-login": [
+        "libs/angular/features/restaurant-owner-dashboard/login/src/index.ts"
+      ],
+      "@xreats/login-access-data": [
+        "libs/angular/data-access/login-data-access/src/index.ts"
+      ],
       "@xreats/nestjs-auth": ["libs/nestjs/auth/src/index.ts"],
       "@xreats/nestjs-bcrypt": ["libs/nestjs/bcrypt/src/index.ts"],
       "@xreats/nestjs-restaurant-owner": [

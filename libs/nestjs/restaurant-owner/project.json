@@ -6,20 +6,14 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/nestjs/restaurant-owner/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/nestjs/restaurant-owner/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/nestjs/restaurant-owner"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/restaurant-owner"],
       "options": {
         "jestConfig": "libs/nestjs/restaurant-owner/jest.config.ts",
         "passWithNoTests": true
