@@ -27,7 +27,9 @@
         "libs/nestjs/restaurant-owner/src/index.ts"
       ],
       "@xreats/nestjs-shared": ["libs/nestjs/shared/src/index.ts"],
-      "@xreats/nestjs-user": ["libs/nestjs/user/src/index.ts"]
+      "@xreats/nestjs-user": ["libs/nestjs/user/src/index.ts"],
+      "@xreats/ui/inputs": ["libs/angular/ui/ui-inputs/src/index.ts"],
+      "@xreats/ui/navigation": ["libs/angular/ui/ui-navigation/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
