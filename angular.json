@@ -4,7 +4,6 @@
     "angular-data-access-login-data-access": "libs/angular/data-access/login-data-access",
     "angular-features-restaurant-owner-dashboard-login": "libs/angular/features/restaurant-owner-dashboard/login",
     "angular-ui-material": "libs/angular/ui/material",
-    "angular-ui-ui-inputs": "libs/angular/ui/ui-inputs",
     "angular-ui-ui-navigation": "libs/angular/ui/ui-navigation",
     "nestjs-bcrypt": "libs/nestjs/bcrypt",
     "nestjs-restaurant-owner": "libs/nestjs/restaurant-owner",
