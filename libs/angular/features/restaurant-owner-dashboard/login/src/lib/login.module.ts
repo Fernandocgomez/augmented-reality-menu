@@ -7,6 +7,8 @@ import { LoginDataAccessModule } from '@xreats/login-access-data';
 import { UiNavigationModule } from '@xreats/ui/navigation';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { MaterialModule } from '@xreats/ui/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginFormFactoryService } from './services/login-form-factory.service';
 
 @NgModule({
   imports: [
@@ -14,8 +16,12 @@ import { MaterialModule } from '@xreats/ui/material';
     RouterModule.forChild(loginRoutes),
     LoginDataAccessModule,
     UiNavigationModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
   ],
   declarations: [LoginComponent, LoginFormComponent],
+  providers: [
+    LoginFormFactoryService
+  ]
 })
 export class LoginModule {}
