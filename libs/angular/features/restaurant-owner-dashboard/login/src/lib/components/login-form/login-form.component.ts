@@ -15,6 +15,7 @@ export class LoginFormComponent {
   loginForm: FormGroup;
   showLoader: Observable<boolean> = of(false);
   disabledSubmitButton: Observable<boolean> = of(false);
+  showErrorAlert: Observable<boolean> = of(false);
 
   constructor(loginFormFactoryService: LoginFormFactoryService) {
     this.loginForm = loginFormFactoryService.createLoginForm();
