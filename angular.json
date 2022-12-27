@@ -10,6 +10,7 @@
     "nestjs-shared": "libs/nestjs/shared",
     "restaurant-owner-dashboard": "apps/restaurant-owner-dashboard",
     "restaurant-owner-dashboard-e2e": "apps/restaurant-owner-dashboard-e2e",
+    "shared-models": "libs/shared-models",
     "xreats-backend": "apps/xreats-backend"
   }
 }
