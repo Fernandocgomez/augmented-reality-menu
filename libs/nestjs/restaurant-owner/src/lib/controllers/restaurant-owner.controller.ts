@@ -11,7 +11,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 
-import { SkipJwtAuthGuard } from '@xreats/nestjs-shared';
+import { SkipJwtAuthGuard } from '@xreats/shared-models';
 
 import { CreateRestaurantOwnerDto } from '../dtos/create-restaurant-owner.dto';
 import { RestaurantOwnerCreatedDto } from '../dtos/restaurant-owner-created.dto';
