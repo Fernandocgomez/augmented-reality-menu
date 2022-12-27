@@ -9,6 +9,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { MaterialModule } from '@xreats/ui/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginFormFactoryService } from './services/login-form-factory.service';
+import { UiAlertsModule } from '@xreats/ui/alerts';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { LoginFormFactoryService } from './services/login-form-factory.service';
     UiNavigationModule,
     MaterialModule,
     ReactiveFormsModule,
+    UiAlertsModule
   ],
   declarations: [LoginComponent, LoginFormComponent],
   providers: [

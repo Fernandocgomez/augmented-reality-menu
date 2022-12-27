@@ -6,13 +6,7 @@ import { LoginFacade } from '@xreats/login-access-data';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent  {
   companyName = 'XrEats';
   companyFoundedYear = '2022';
-
-  constructor(private readonly loginFacade: LoginFacade) {}
-  
-  ngOnInit(): void {
-    this.loginFacade.dispatchAuthUserAction();
-  }
 }

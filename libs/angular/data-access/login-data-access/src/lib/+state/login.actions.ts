@@ -1,7 +1,22 @@
 import { createAction, props } from '@ngrx/store';
 
-export const authUser = createAction('[Login Page] Auth User');
+export const loginRequestStartAction = createAction(
+  '[Login Page] Login Request Start',
+  props<{ username: string; password: string }>()
+);
 
-export const authUserSuccess = createAction('[Login Page] Auth Success');
+export const loginRequestFailAction = createAction(
+  '[Login Page] Login Request Fail',
+  props<{ statusCode: number; message: string[]; error: string }>()
+);
 
-export const authUserFailure = createAction('[Login Page] Auth Failure');
+export const loginRequestSuccessAction = createAction(
+  '[Login Page] Login Request Success',
+  props<{
+    access_token: string;
+    restaurantOwner: {
+      id: string;
+      username: string;
+    };
+  }>()
+);

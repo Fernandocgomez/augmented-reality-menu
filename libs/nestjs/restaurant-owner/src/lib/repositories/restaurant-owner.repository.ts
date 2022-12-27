@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpCode, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { RestaurantOwner, RestaurantOwnerDocument } from '../schemas/restaurant-owner.schema';
 
@@ -17,6 +17,7 @@ export class RestaurantOwnerRepository {
                 {
                     statusCode: HttpStatus.BAD_REQUEST,
                     message: `Username '${e.errors.username.value}' already exist.`,
+                    error: 'Bad Request'
                 },
                 HttpStatus.BAD_REQUEST
             );
@@ -67,7 +68,8 @@ export class RestaurantOwnerRepository {
         throw new HttpException(
             {
                 statusCode: HttpStatus.NOT_FOUND,
-                message: `Restaurant owner not found`
+                message: `Restaurant owner not found`,
+                error: 'Not Found'
             },
             HttpStatus.NOT_FOUND
         )
