@@ -24,7 +24,8 @@ import { BcryptModule } from '@xreats/nestjs-bcrypt';
 import { LocalStrategy } from './passport-strategies/local.strategy';
 import { JwtStrategy } from './passport-strategies/jwt.strategy';
 
-import { JwtAuthGuard } from '@xreats/nestjs-shared';
+import { JwtAuthGuard } from '@xreats/shared-models';
+
 
 const GlobalJwtAuthGuard = {
   provide: APP_GUARD,

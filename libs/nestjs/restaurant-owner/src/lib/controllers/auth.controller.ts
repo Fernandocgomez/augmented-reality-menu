@@ -1,6 +1,6 @@
 import { Controller, Post, Request, UseGuards } from '@nestjs/common';
 
-import { SkipJwtAuthGuard } from '@xreats/nestjs-shared';
+import { SkipJwtAuthGuard } from '@xreats/shared-models';
 
 import { JsonWebTokenDto } from '../dtos/json-web-token.dto';
 import { RestaurantOwnerLoggedInDto } from '../dtos/restaurant-owner-logged-in.dto';
