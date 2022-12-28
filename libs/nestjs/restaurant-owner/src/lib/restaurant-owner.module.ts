@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
 
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
@@ -23,14 +22,6 @@ import { BcryptModule } from '@xreats/nestjs-bcrypt';
 
 import { LocalStrategy } from './passport-strategies/local.strategy';
 import { JwtStrategy } from './passport-strategies/jwt.strategy';
-
-import { JwtAuthGuard } from '@xreats/shared-models';
-
-
-const GlobalJwtAuthGuard = {
-  provide: APP_GUARD,
-  useClass: JwtAuthGuard,
-};
 
 @Module({
   imports: [
@@ -62,7 +53,6 @@ const GlobalJwtAuthGuard = {
     AuthService,
     LocalStrategy,
     JwtStrategy,
-    GlobalJwtAuthGuard,
   ],
 })
 export class RestaurantOwnerModule {}
