@@ -4,75 +4,92 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { BcryptService } from '@xreats/nestjs-bcrypt';
 
-import { RestaurantOwnerRetrievedDto } from '../dtos/restaurant-owner-retrieved.dto';
-import { RestaurantOwnerUpdatedDto } from '../dtos/restaurant-owner-updated.dto';
 import { UpdateRestaurantOwnerDto } from '../dtos/update-restaurant-owner.dto';
-import { RestaurantOwnerCreatedDto } from '../dtos/restaurant-owner-created.dto';
-import { RestaurantOwnerDeleted } from '../dtos/restaurant-owner-deleted.dto';
-import { RestaurantOwner } from '../schemas/restaurant-owner.schema';
 
 import { RestaurantOwnerRepository } from '../repositories/restaurant-owner.repository';
+import { PartialRestaurantOwnerType } from '../types/partial-restaurant-owner.type';
+
+import { RestaurantOwnerLeanDocumentType } from '../types/restaurant-owner-lean-document.type';
+
+import { RestaurantOwnerTransformerUtility } from '../utilities/restaurant-owner-transformer.utility';
 
 @Injectable()
 export class RestaurantOwnerService {
-    constructor(
-        private readonly restaurantOwnerRepository: RestaurantOwnerRepository,
-        private readonly bcryptService: BcryptService
-    ) {}
+	private restaurantOwnerTransformer = new RestaurantOwnerTransformerUtility();
 
-    async createRestaurantOwner(username: string, password: string): Promise<RestaurantOwnerCreatedDto> {
-        const hashedPassword = await this.hashPassword(password);
-        
-        const restaurantOwner = await this.restaurantOwnerRepository.createRestaurantOwner({
-            id: uuidv4(),
-            username,
-            password: hashedPassword
-        });
+	constructor(
+		private readonly restaurantOwnerRepository: RestaurantOwnerRepository,
+		private readonly bcryptService: BcryptService
+	) {}
 
-        return { id: restaurantOwner.id, username: restaurantOwner.username };
-    }
+	async createRestaurantOwner(
+		username: string,
+		password: string
+	): Promise<PartialRestaurantOwnerType> {
+		const hashedPassword = await this.hashPassword(password);
 
-    async findRestaurantOwnerById(id: string): Promise<RestaurantOwnerRetrievedDto> {
-        const restaurantOwner = await this.restaurantOwnerRepository.findRestaurantOwnerById(id);
+		const restaurantOwner = await this.restaurantOwnerRepository.createRestaurantOwner({
+			id: uuidv4(),
+			username,
+			password: hashedPassword,
+		});
 
-        return { id: restaurantOwner.id, username: restaurantOwner.username };
-    }
-    
-    async findRestaurantOwnerByUsername(username: string): Promise<RestaurantOwner> {
-        return await this.restaurantOwnerRepository.findRestaurantOwnerByUsername(username);
-    }
+		return await this.restaurantOwnerTransformer.removeSensitiveProperties(restaurantOwner);
+	}
 
-    async updateRestaurantOwner(restaurantOwnerId: string, updateRestaurantOwnerDto: UpdateRestaurantOwnerDto): Promise<RestaurantOwnerUpdatedDto> {
-        let updateRestaurantOwnerDtoCopy = {...updateRestaurantOwnerDto};
+	async findRestaurantOwnerById(id: string): Promise<PartialRestaurantOwnerType> {
+		const restaurantOwner = await this.restaurantOwnerRepository.findRestaurantOwnerById(id);
 
-        if(updateRestaurantOwnerDtoCopy?.password) {
-            const hashedPassword = await this.hashPassword(updateRestaurantOwnerDtoCopy.password); 
+		return await this.restaurantOwnerTransformer.removeSensitiveProperties(restaurantOwner);
+	}
 
-            updateRestaurantOwnerDtoCopy = {
-                ...updateRestaurantOwnerDtoCopy,
-                password: hashedPassword
-            }
-        }
+	async findRestaurantOwnerByUsername(username: string): Promise<RestaurantOwnerLeanDocumentType> {
+		const restaurantOwner = await this.restaurantOwnerRepository.findRestaurantOwnerByUsername(
+			username
+		);
 
-        const updatedRestaurantOwner = await this.restaurantOwnerRepository.updateRestaurantOwnerById(
-            { id: restaurantOwnerId },
-            updateRestaurantOwnerDtoCopy
-        );
+		return await restaurantOwner;
+	}
 
-        return { id: updatedRestaurantOwner.id, username: updatedRestaurantOwner.username };
-    }
-    
-    async deleteRestaurantOwner(id: string): Promise<RestaurantOwnerDeleted> {
-        const deletedRestaurantOwner = await this.restaurantOwnerRepository.deleteRestaurantOwnerById(id);
+	async updateRestaurantOwner(
+		restaurantOwnerId: string,
+		updateRestaurantOwnerDto: UpdateRestaurantOwnerDto
+	): Promise<PartialRestaurantOwnerType> {
+		let updateRestaurantOwnerDtoCopy = { ...updateRestaurantOwnerDto };
 
-        return { id: deletedRestaurantOwner.id, username: deletedRestaurantOwner.username };
-    }
+		if (updateRestaurantOwnerDtoCopy?.password) {
+			const hashedPassword = await this.hashPassword(updateRestaurantOwnerDtoCopy.password);
 
-    async compareRawPasswordWithHashedPassword(rawPassword: string, hashedPassword: string): Promise<boolean> {
-        return this.bcryptService.compare(rawPassword, hashedPassword);
-    }
+			updateRestaurantOwnerDtoCopy = {
+				...updateRestaurantOwnerDtoCopy,
+				password: hashedPassword,
+			};
+		}
 
-    private async hashPassword(password: string): Promise<string> {
-        return await this.bcryptService.hash(password);
-    }
+		const updatedRestaurantOwner = await this.restaurantOwnerRepository.updateRestaurantOwnerById(
+			{ id: restaurantOwnerId },
+			updateRestaurantOwnerDtoCopy
+		);
+
+		return await this.restaurantOwnerTransformer.removeSensitiveProperties(updatedRestaurantOwner);
+	}
+
+	async deleteRestaurantOwner(id: string): Promise<PartialRestaurantOwnerType> {
+		const deletedRestaurantOwner = await this.restaurantOwnerRepository.deleteRestaurantOwnerById(
+			id
+		);
+
+		return await this.restaurantOwnerTransformer.removeSensitiveProperties(deletedRestaurantOwner);
+	}
+
+	async compareRawPasswordWithHashedPassword(
+		rawPassword: string,
+		hashedPassword: string
+	): Promise<boolean> {
+		return this.bcryptService.compare(rawPassword, hashedPassword);
+	}
+
+	private async hashPassword(password: string): Promise<string> {
+		return await this.bcryptService.hash(password);
+	}
 }

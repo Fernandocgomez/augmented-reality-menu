@@ -1,8 +1,11 @@
+import { RestaurantOwnerInterface, RestaurantOwnerValidationErrorMessages } from '@xreats/shared-models';
 import { Length, Matches } from 'class-validator';
 
-import { RestaurantOwnerValidationErrorMessages } from '../enums/restaurant-owner-validation-error-messages.enum';
+export class UpdateRestaurantOwnerDto implements RestaurantOwnerInterface {
+    id: string;
 
-export class UpdateRestaurantOwnerDto {
+    username: string;
+
     @Length(8, 20)
     @Matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/, {
         message: RestaurantOwnerValidationErrorMessages.password

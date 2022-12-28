@@ -5,7 +5,10 @@ export type RestaurantOwnerDocument = RestaurantOwner & Document;
 
 @Schema()
 export class RestaurantOwner {
-  @Prop()
+  @Prop({
+    unique: true,
+    immutable: true
+  })
   id: string;
 
   @Prop({

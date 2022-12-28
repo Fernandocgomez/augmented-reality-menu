@@ -2,12 +2,12 @@ import { Controller, Post, Request, UseGuards } from '@nestjs/common';
 
 import { SkipJwtAuthGuard } from '@xreats/shared-models';
 
-import { JsonWebTokenDto } from '../dtos/json-web-token.dto';
-import { RestaurantOwnerLoggedInDto } from '../dtos/restaurant-owner-logged-in.dto';
+import { RestaurantOwnerLoginDataDto } from '../dtos/restaurant-owner-login-data.dto';
 
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 
 import { AuthService } from '../services/auth.service';
+import { PartialRestaurantOwnerType } from '../types/partial-restaurant-owner.type';
 
 @Controller('auth')
 export class AuthController {
@@ -16,9 +16,11 @@ export class AuthController {
   @SkipJwtAuthGuard()
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req): Promise<JsonWebTokenDto> {
-    const user: RestaurantOwnerLoggedInDto = req.user;
+  async login(@Request() req): Promise<RestaurantOwnerLoginDataDto> {
+    const restaurantOwner: PartialRestaurantOwnerType = req.user;
+    const access_token = await this.authService.getJsonWebToken(restaurantOwner); 
+    
+    return { access_token, restaurantOwner };
 
-    return this.authService.getJsonWebToken(user);
   }
 }
