@@ -1,16 +1,18 @@
 {
-  "version": 2,
-  "projects": {
-    "angular-data-access-login-data-access": "libs/angular/data-access/login-data-access",
-    "angular-features-restaurant-owner-dashboard-login": "libs/angular/features/restaurant-owner-dashboard/login",
-    "angular-ui-material": "libs/angular/ui/material",
-    "angular-ui-ui-alerts": "libs/angular/ui/ui-alerts",
-    "angular-ui-ui-navigation": "libs/angular/ui/ui-navigation",
-    "nestjs-bcrypt": "libs/nestjs/bcrypt",
-    "nestjs-restaurant-owner": "libs/nestjs/restaurant-owner",
-    "restaurant-owner-dashboard": "apps/restaurant-owner-dashboard",
-    "restaurant-owner-dashboard-e2e": "apps/restaurant-owner-dashboard-e2e",
-    "shared-models": "libs/shared-models",
-    "xreats-backend": "apps/xreats-backend"
-  }
+	"version": 2,
+	"projects": {
+		"angular-data-access-login-data-access": "libs/angular/data-access/login-data-access",
+		"angular-features-restaurant-owner-dashboard-login": "libs/angular/features/restaurant-owner-dashboard/login",
+		"angular-shared": "libs/angular/shared",
+		"angular-ui-material": "libs/angular/ui/material",
+		"angular-ui-ui-alerts": "libs/angular/ui/ui-alerts",
+		"angular-ui-ui-navigation": "libs/angular/ui/ui-navigation",
+		"nestjs-bcrypt": "libs/nestjs/bcrypt",
+		"nestjs-restaurant-owner": "libs/nestjs/restaurant-owner",
+		"nestjs-shared": "libs/nestjs/shared",
+		"restaurant-owner-dashboard": "apps/restaurant-owner-dashboard",
+		"restaurant-owner-dashboard-e2e": "apps/restaurant-owner-dashboard-e2e",
+		"shared-models": "libs/shared-models",
+		"xreats-backend": "apps/xreats-backend"
+	}
 }

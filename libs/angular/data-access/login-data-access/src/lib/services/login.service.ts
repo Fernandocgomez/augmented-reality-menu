@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, delay } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
-interface LoginResponse {
-  access_token: string;
-  restaurantOwner: {
-    id: string;
-    username: string;
-  };
-}
+import { RestaurantOwnerLoginInterface } from '@xreats/shared-models';
 
 @Injectable()
 export class LoginService {
@@ -17,8 +10,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<LoginResponse> {
+  login(username: string, password: string): Observable<RestaurantOwnerLoginInterface> {
 
-    return this.http.post<LoginResponse>(`${this.xreatsBackendEndPoint}auth/login`, { username, password });
+    return this.http.post<RestaurantOwnerLoginInterface>(`${this.xreatsBackendEndPoint}auth/login`, { username, password });
   }
 }

@@ -1,18 +1,22 @@
 import { createReducer, on, Action } from '@ngrx/store';
 
+import { HttpExceptionResponseInterface, HttpRequestStateEnum } from '@xreats/shared-models';
+
 import * as LoginActions from './login.actions';
 
-type LoginStatus = '' | 'LOADING' | 'SUCCESS' | 'FAILURE';
+enum fer {
+
+}
 
 export const LOGIN_FEATURE_KEY = 'login';
 
 export interface LoginState {
-  status: LoginStatus;
+  status: HttpRequestStateEnum;
   errorMessages: string[];
 }
 
 export const initialLoginState: LoginState = {
-  status: '',
+  status: HttpRequestStateEnum.INITIAL_STATE,
   errorMessages: [],
 };
 
@@ -21,18 +25,18 @@ const loginRequestStartReducer = (
 ): LoginState => {
   return {
     ...state,
-    status: 'LOADING',
+    status: HttpRequestStateEnum.LOADING,
     errorMessages: []
   };
 };
 
 const loginRequestFailReducer = (
   state: LoginState,
-  action: { statusCode: number, message: string[], error: string }
+  action: HttpExceptionResponseInterface
 ): LoginState => {
   return {
     ...state,
-    status: 'FAILURE',
+    status: HttpRequestStateEnum.FAILURE,
     errorMessages: action.message,
   };
 };
@@ -42,7 +46,7 @@ const loginRequestSuccessReducer = (
 ): LoginState => {
   return {
     ...state,
-    status: 'SUCCESS',
+    status: HttpRequestStateEnum.SUCCESS,
     errorMessages: [],
   };
 };

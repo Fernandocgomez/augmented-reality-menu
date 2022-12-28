@@ -4,10 +4,7 @@ import { APP_GUARD, APP_FILTER } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { RestaurantOwnerModule } from '@xreats/nestjs-restaurant-owner';
-
-import { JwtAuthGuard } from '@xreats/shared-models';
-
-import { HttpExceptionFilter } from '@xreats/shared-models';
+import { HttpExceptionFilter, JwtAuthGuard } from '@xreats/nestjs/shared';
 
 
 const GlobalJwtAuthGuard = {
