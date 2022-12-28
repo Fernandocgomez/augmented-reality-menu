@@ -5,72 +5,92 @@ import { RestaurantOwner, RestaurantOwnerDocument } from '../schemas/restaurant-
 import { FilterQuery, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
+import { RestaurantOwnerLeanDocumentType } from '../types/restaurant-owner-lean-document.type';
+
+import { PartialRestaurantOwnerType } from '../types/partial-restaurant-owner.type';
+
 @Injectable()
 export class RestaurantOwnerRepository {
-    constructor(@InjectModel(RestaurantOwner.name) private restaurantOwnerModel: Model<RestaurantOwnerDocument>) { }
+	constructor(
+		@InjectModel(RestaurantOwner.name) private restaurantOwnerModel: Model<RestaurantOwnerDocument>
+	) {}
 
-    async createRestaurantOwner(restaurantOwner: RestaurantOwner): Promise<RestaurantOwner> {
-        const newRestaurantOwner = new this.restaurantOwnerModel(restaurantOwner);
+	async createRestaurantOwner(
+		restaurantOwner: RestaurantOwner
+	): Promise<RestaurantOwnerLeanDocumentType> {
+		const newRestaurantOwner = new this.restaurantOwnerModel(restaurantOwner);
 
-        return newRestaurantOwner.save().catch((e) => {
-            throw new HttpException(
-                {
-                    statusCode: HttpStatus.BAD_REQUEST,
-                    message: `Username '${e.errors.username.value}' already exist.`,
-                },
-                HttpStatus.BAD_REQUEST
-            );
-        });
-    }
+		const restaurantOwnerDocument = await newRestaurantOwner.save().catch((e) => {
+			throw new HttpException(
+				{
+					statusCode: HttpStatus.BAD_REQUEST,
+					message: `Username '${e.errors.username.value}' already exist.`,
+				},
+				HttpStatus.BAD_REQUEST
+			);
+		});
 
-    async findRestaurantOwnerById(id: string): Promise<RestaurantOwner> {
-        const restaurantOwner = await this.restaurantOwnerModel.findOne({ id });
+		return await restaurantOwnerDocument.toObject();
+	}
 
-        if (!restaurantOwner) {
-            this.throwNotFoundException();
-        }
+	async findRestaurantOwnerById(id: string): Promise<RestaurantOwnerLeanDocumentType> {
+		const restaurantOwner = await this.restaurantOwnerModel.findOne({ id });
 
-        return restaurantOwner;
-    }
+		if (!restaurantOwner) {
+			this.throwNotFoundException();
+		}
 
-    async findRestaurantOwnerByUsername(username: string): Promise<RestaurantOwner> {
-        const restaurantOwner = await this.restaurantOwnerModel.findOne({ username });
+		return restaurantOwner.toObject();
+	}
 
-        if (!restaurantOwner) {
-            this.throwNotFoundException();
-        }
+	async findRestaurantOwnerByUsername(username: string): Promise<RestaurantOwnerLeanDocumentType> {
+		const restaurantOwner = await this.restaurantOwnerModel.findOne({
+			username,
+		});
 
-        return restaurantOwner;
-    }
+		if (!restaurantOwner) {
+			this.throwNotFoundException();
+		}
 
-    async updateRestaurantOwnerById(restaurantOwnerQuery: FilterQuery<RestaurantOwner>, partialRestaurantOwner: Partial<RestaurantOwner>): Promise<RestaurantOwner> {
-        const restaurantOwner = await this.restaurantOwnerModel.findOneAndUpdate(restaurantOwnerQuery, partialRestaurantOwner, { new: true });
-    
-        if (!restaurantOwner) {
-            this.throwNotFoundException();
-        }
+		return restaurantOwner.toObject();
+	}
 
-        return restaurantOwner;
-    }
+	async updateRestaurantOwnerById(
+		restaurantOwnerQuery: FilterQuery<RestaurantOwner>,
+		partialRestaurantOwner: PartialRestaurantOwnerType
+	): Promise<RestaurantOwnerLeanDocumentType> {
+		const restaurantOwner = await this.restaurantOwnerModel.findOneAndUpdate(
+			restaurantOwnerQuery,
+			partialRestaurantOwner,
+			{ new: true }
+		);
 
-    async deleteRestaurantOwnerById(id: string): Promise<RestaurantOwner> {
-        const restaurantOwner = await this.restaurantOwnerModel.findOneAndDelete({ id });
+		if (!restaurantOwner) {
+			this.throwNotFoundException();
+		}
 
-        if (!restaurantOwner) {
-            this.throwNotFoundException();
-        }
-    
-        return restaurantOwner;
-    }
+		return restaurantOwner.toObject();
+	}
 
-    private throwNotFoundException() {
-        throw new HttpException(
-            {
-                statusCode: HttpStatus.NOT_FOUND,
-                message: `Restaurant owner not found`
-            },
-            HttpStatus.NOT_FOUND
-        )
-    }
-    
+	async deleteRestaurantOwnerById(id: string): Promise<RestaurantOwnerLeanDocumentType> {
+		const restaurantOwner = await this.restaurantOwnerModel.findOneAndDelete({
+			id,
+		});
+
+		if (!restaurantOwner) {
+			this.throwNotFoundException();
+		}
+
+		return restaurantOwner.toObject();
+	}
+
+	private throwNotFoundException() {
+		throw new HttpException(
+			{
+				statusCode: HttpStatus.NOT_FOUND,
+				message: `Restaurant owner not found`,
+			},
+			HttpStatus.NOT_FOUND
+		);
+	}
 }
