@@ -1,34 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { JsonWebTokenDto } from '../dtos/json-web-token.dto';
-import { RestaurantOwnerLoggedInDto } from '../dtos/restaurant-owner-logged-in.dto';
+import { PartialRestaurantOwnerType } from '../types/partial-restaurant-owner.type';
 
 import { RestaurantOwnerService } from './restaurant-owner.service';
 
+import { RestaurantOwnerTransformerUtility } from './../utilities/restaurant-owner-transformer.utility';
+
 @Injectable()
 export class AuthService {
+    private restaurantOwnerTransformer = new RestaurantOwnerTransformerUtility();
+
     constructor(
         private readonly restaurantOwnerService: RestaurantOwnerService,
         private readonly jwtService: JwtService
     ) {}
 
-    async validateUser(username: string, password: string): Promise<RestaurantOwnerLoggedInDto> {
-        const user = await this.restaurantOwnerService.findRestaurantOwnerByUsername(username);
-        const passwordMatch = await this.restaurantOwnerService.compareRawPasswordWithHashedPassword(password, user.password);
+    async validateRestaurantOwner(username: string, password: string): Promise<PartialRestaurantOwnerType> {
+        const restaurantOwner = await this.restaurantOwnerService.findRestaurantOwnerByUsername(username);
+        const passwordMatch = await this.restaurantOwnerService.compareRawPasswordWithHashedPassword(password, restaurantOwner.password);
 
         if(passwordMatch) {
-            return { id: user.id, username: user.username };
+            return await this.restaurantOwnerTransformer.removeSensitiveProperties(restaurantOwner);
         }
 
         return null;
     }
 
-    async getJsonWebToken(user: RestaurantOwnerLoggedInDto): Promise<JsonWebTokenDto> {
+    async getJsonWebToken(user: PartialRestaurantOwnerType): Promise<string> {
         const payload = { username: user.username, sub: user.id };
 
-        return {
-            access_token: this.jwtService.sign(payload)
-        }
+        return this.jwtService.sign(payload);
     }
 }

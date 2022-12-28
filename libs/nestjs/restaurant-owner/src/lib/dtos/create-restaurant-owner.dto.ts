@@ -1,6 +1,6 @@
 import { Length, Matches } from 'class-validator';
 
-import { RestaurantOwnerValidationErrorMessages } from '../enums/restaurant-owner-validation-error-messages.enum';
+import { RestaurantOwnerValidationErrorMessages } from '@xreats/shared-models';
 
 export class CreateRestaurantOwnerDto {
   @Length(5, 16)

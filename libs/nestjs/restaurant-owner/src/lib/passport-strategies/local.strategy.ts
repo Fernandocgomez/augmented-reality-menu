@@ -3,9 +3,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 import { Strategy } from 'passport-local';
 
-import { RestaurantOwnerLoggedInDto } from '../dtos/restaurant-owner-logged-in.dto';
-
 import { AuthService } from '../services/auth.service';
+import { PartialRestaurantOwnerType } from '../types/partial-restaurant-owner.type';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -13,8 +12,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
         super();
     }
 
-    async validate(username: string, password: string): Promise<RestaurantOwnerLoggedInDto> {
-        const user = await this.authService.validateUser(username, password);
+    async validate(username: string, password: string): Promise<PartialRestaurantOwnerType> {
+        const user = await this.authService.validateRestaurantOwner(username, password);
 
         if (!user) {
             throw new UnauthorizedException();
