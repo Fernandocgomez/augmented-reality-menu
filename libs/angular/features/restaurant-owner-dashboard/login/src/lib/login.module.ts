@@ -5,14 +5,25 @@ import { loginRoutes } from './lib.routes';
 import { LoginComponent } from './login.component';
 import { LoginDataAccessModule } from '@xreats/login-access-data';
 import { UiNavigationModule } from '@xreats/ui/navigation';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { MaterialModule } from '@xreats/ui/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginFormFactoryService } from './services/login-form-factory.service';
+import { UiAlertsModule } from '@xreats/ui/alerts';
 
 @NgModule({
   imports: [
-    CommonModule, 
+  CommonModule,
     RouterModule.forChild(loginRoutes),
     LoginDataAccessModule,
-    UiNavigationModule
+    UiNavigationModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    UiAlertsModule
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, LoginFormComponent],
+  providers: [
+    LoginFormFactoryService
+  ]
 })
 export class LoginModule {}

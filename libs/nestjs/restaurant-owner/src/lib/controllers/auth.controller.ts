@@ -1,6 +1,6 @@
 import { Controller, Post, Request, UseGuards } from '@nestjs/common';
 
-import { SkipJwtAuthGuard } from '@xreats/shared-models';
+import { SkipJwtAuthGuard } from '@xreats/nestjs/shared';
 
 import { RestaurantOwnerLoginDataDto } from '../dtos/restaurant-owner-login-data.dto';
 

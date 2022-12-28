@@ -1,7 +1,17 @@
 import { createAction, props } from '@ngrx/store';
+import { HttpExceptionResponseInterface, RestaurantOwnerLoginInterface } from '@xreats/shared-models';
 
-export const authUser = createAction('[Login Page] Auth User');
+export const loginRequestStartAction = createAction(
+  '[Login Page] Login Request Start',
+  props<{ username: string; password: string }>()
+);
 
-export const authUserSuccess = createAction('[Login Page] Auth Success');
+export const loginRequestFailAction = createAction(
+  '[Login Page] Login Request Fail',
+  props<HttpExceptionResponseInterface>()
+);
 
-export const authUserFailure = createAction('[Login Page] Auth Failure');
+export const loginRequestSuccessAction = createAction(
+  '[Login Page] Login Request Success',
+  props<RestaurantOwnerLoginInterface>()
+);

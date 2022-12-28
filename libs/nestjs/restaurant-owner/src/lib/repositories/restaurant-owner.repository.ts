@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpCode, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { RestaurantOwner, RestaurantOwnerDocument } from '../schemas/restaurant-owner.schema';
 

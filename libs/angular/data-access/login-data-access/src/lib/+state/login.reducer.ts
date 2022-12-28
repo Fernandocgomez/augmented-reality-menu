@@ -1,56 +1,61 @@
 import { createReducer, on, Action } from '@ngrx/store';
 
+import { HttpExceptionResponseInterface, HttpRequestStateEnum } from '@xreats/shared-models';
+
 import * as LoginActions from './login.actions';
 
-enum LoginStatus {
-  INITIAL_STATE = 'INITIAL_STATE',
-  LOADING = 'LOADING',
-  SUCCESS = 'SUCCESS',
-  FAILURE = 'FAILURE', 
+enum fer {
+
 }
 
 export const LOGIN_FEATURE_KEY = 'login';
 
 export interface LoginState {
-  isAuthenticated: boolean;
-  status: LoginStatus,
-  errorMessage: string | null;
-  restaurantOwner: '',
+  status: HttpRequestStateEnum;
+  errorMessages: string[];
 }
 
 export const initialLoginState: LoginState = {
-  isAuthenticated: false,
-  status: LoginStatus.INITIAL_STATE,
-  errorMessage: null,
-  restaurantOwner: ''
+  status: HttpRequestStateEnum.INITIAL_STATE,
+  errorMessages: [],
 };
 
-const authUser = (state: LoginState): LoginState => {
+const loginRequestStartReducer = (
+  state: LoginState,
+): LoginState => {
   return {
     ...state,
-    status: LoginStatus.LOADING,
-  }
+    status: HttpRequestStateEnum.LOADING,
+    errorMessages: []
+  };
 };
 
-const authUserSuccess = (state: LoginState): LoginState => {
+const loginRequestFailReducer = (
+  state: LoginState,
+  action: HttpExceptionResponseInterface
+): LoginState => {
   return {
     ...state,
-    status: LoginStatus.SUCCESS,
-  }
+    status: HttpRequestStateEnum.FAILURE,
+    errorMessages: action.message,
+  };
 };
 
-const authUserFailure = (state: LoginState): LoginState => {
+const loginRequestSuccessReducer = (
+  state: LoginState,
+): LoginState => {
   return {
     ...state,
-    status: LoginStatus.SUCCESS,
-  }
+    status: HttpRequestStateEnum.SUCCESS,
+    errorMessages: [],
+  };
 };
 
 const reducer = createReducer(
   initialLoginState,
-  on(LoginActions.authUser, authUser),
-  on(LoginActions.authUserSuccess, authUserSuccess),
-  on(LoginActions.authUserFailure, authUserFailure)
+  on(LoginActions.loginRequestStartAction, loginRequestStartReducer),
+  on(LoginActions.loginRequestFailAction, loginRequestFailReducer),
+  on(LoginActions.loginRequestSuccessAction, loginRequestSuccessReducer),
 );
 
 export function loginReducer(state: LoginState | undefined, action: Action) {
