@@ -4,7 +4,7 @@ import { RestaurantOwnerValidationErrorMessages } from '@xreats/shared-models';
 
 export class CreateRestaurantOwnerDto {
   @Length(5, 16)
-  @Matches(/^[a-zA-Z0-9]*$/, {
+  @Matches(/^[a-z0-9]*$/, {
     message: RestaurantOwnerValidationErrorMessages.username,
   })
   username: string;
