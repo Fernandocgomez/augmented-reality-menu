@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { PartialRestaurantOwnerType } from '../types/partial-restaurant-owner.type';
@@ -24,7 +24,7 @@ export class AuthService {
             return await this.restaurantOwnerTransformer.removeSensitiveProperties(restaurantOwner);
         }
 
-        return null;
+        throw new UnauthorizedException('Invalid credentials');
     }
 
     async getJsonWebToken(user: PartialRestaurantOwnerType): Promise<string> {
