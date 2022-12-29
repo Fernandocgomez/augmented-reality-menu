@@ -1,4 +1,4 @@
-import { HttpCode, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpCode, HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 
 import { RestaurantOwner, RestaurantOwnerDocument } from '../schemas/restaurant-owner.schema';
 
@@ -21,13 +21,7 @@ export class RestaurantOwnerRepository {
 		const newRestaurantOwner = new this.restaurantOwnerModel(restaurantOwner);
 
 		const restaurantOwnerDocument = await newRestaurantOwner.save().catch((e) => {
-			throw new HttpException(
-				{
-					statusCode: HttpStatus.BAD_REQUEST,
-					message: `Username '${e.errors.username.value}' already exist.`,
-				},
-				HttpStatus.BAD_REQUEST
-			);
+			throw new BadRequestException(`Username '${e.errors.username.value}' already exist.`,);
 		});
 
 		return await restaurantOwnerDocument.toObject();
@@ -49,7 +43,7 @@ export class RestaurantOwnerRepository {
 		});
 
 		if (!restaurantOwner) {
-			this.throwNotFoundException();
+			throw new UnauthorizedException('Invalid credentials');
 		}
 
 		return restaurantOwner.toObject();
@@ -85,12 +79,6 @@ export class RestaurantOwnerRepository {
 	}
 
 	private throwNotFoundException() {
-		throw new HttpException(
-			{
-				statusCode: HttpStatus.NOT_FOUND,
-				message: `Restaurant owner not found`,
-			},
-			HttpStatus.NOT_FOUND
-		);
+		throw new NotFoundException('Restaurant owner not found');
 	}
 }
