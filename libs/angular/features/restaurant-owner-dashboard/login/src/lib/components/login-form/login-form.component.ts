@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { LoginFormFactoryService } from './../../services/login-form-factory.service';
 import { LoginFacade } from '@xreats/login-access-data';
+
+import { RestaurantOwnerValidationErrorMessages } from '@xreats/shared-models';
 
 @Component({
   selector: 'feature-login-form',
@@ -44,5 +46,9 @@ export class LoginFormComponent {
 
   isPasswordControlValid() {
     return this.loginForm.get('password')?.valid;
+  }
+
+  getUsernameControlErrorMessage() {
+    return RestaurantOwnerValidationErrorMessages.username;
   }
 }

@@ -18,7 +18,7 @@
                 <mat-form-field  appearance="fill">
                     <mat-label>Username</mat-label>
                     <input type="text" matInput placeholder="Username" formControlName="username">
-                    <mat-error *ngIf="!isUsernameControlValid()">Username is invalid</mat-error>
+                    <mat-error *ngIf="!isUsernameControlValid()">{{ getUsernameControlErrorMessage() }}</mat-error>
                 </mat-form-field>
                 <mat-form-field  appearance="fill" *ngIf="isUsernameControlValid()">
                     <mat-label>Enter your password</mat-label>
