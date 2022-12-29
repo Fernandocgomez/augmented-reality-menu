@@ -18,7 +18,7 @@ export class LoginFormFactoryService {
       Validators.required, 
       Validators.maxLength(16), 
       Validators.minLength(5), 
-      Validators.pattern(/^[a-zA-Z0-9]*$/)
+      Validators.pattern(/^[a-z0-9]*$/)
     ])
   }
 
