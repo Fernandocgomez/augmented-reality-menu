@@ -4,10 +4,6 @@ import { HttpExceptionResponseInterface, HttpRequestStateEnum } from '@xreats/sh
 
 import * as LoginActions from './login.actions';
 
-enum fer {
-
-}
-
 export const LOGIN_FEATURE_KEY = 'login';
 
 export interface LoginState {

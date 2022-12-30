@@ -13,7 +13,9 @@ import { LoginService } from '../services/login.service';
 
 import { HttpExceptionResponseInterface } from '@xreats/shared-models';
 
-import { LocalStorageService } from '@xreats/angular/shared';
+import { TokenLocalStorageService } from '@xreats/angular/shared';
+
+import { AuthFacade } from '@xreats/data-access/auth';
 
 @Injectable()
 export class LoginEffects {
@@ -22,7 +24,8 @@ export class LoginEffects {
 	constructor(
 		private readonly loginService: LoginService,
 		private readonly router: Router,
-		private readonly localStorageService: LocalStorageService
+		private readonly tokenLocalStorageService: TokenLocalStorageService,
+		private readonly authFace: AuthFacade,
 	) {}
 
 	loginRequestStart$ = createEffect(() =>
@@ -38,7 +41,7 @@ export class LoginEffects {
 						})
 					);
 				},
-				onError: (action, error) => {
+				onError: (_, error) => {
 					const httpExceptionResponse: HttpExceptionResponseInterface = error.error;
 
 					return LoginActions.loginRequestFailAction(httpExceptionResponse);
@@ -52,7 +55,8 @@ export class LoginEffects {
 			this.actions$.pipe(
 				ofType(LoginActions.loginRequestSuccessAction),
 				tap((action) => {
-					this.localStorageService.setItem('access_token', action.access_token);
+					this.tokenLocalStorageService.setAccessToken(action.access_token);
+					this.authFace.dispatchAuthenticatedRestaurantOwnerAction(action.restaurantOwner);
 					this.router.navigate(['/dashboard']);
 				})
 			),
