@@ -10,6 +10,7 @@ import { MaterialModule } from '@xreats/ui/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginFormFactoryService } from './services/login-form-factory.service';
 import { UiAlertsModule } from '@xreats/ui/alerts';
+import { LoginGuard } from './guards/login.guard';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { UiAlertsModule } from '@xreats/ui/alerts';
   ],
   declarations: [LoginComponent, LoginFormComponent],
   providers: [
-    LoginFormFactoryService
+    LoginFormFactoryService,
+    LoginGuard,
   ]
 })
 export class LoginModule {}

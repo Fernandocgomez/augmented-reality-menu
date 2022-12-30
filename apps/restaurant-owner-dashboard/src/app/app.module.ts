@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from '@xreats/data-access/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,8 +36,8 @@ import { AppRoutingModule } from './app-routing.module';
       maxAge: 25,
       logOnly: environment.production,
     }),
+    AuthModule
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

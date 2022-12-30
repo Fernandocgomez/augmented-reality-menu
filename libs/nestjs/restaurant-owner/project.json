@@ -1,24 +1,24 @@
 {
-  "name": "nestjs-restaurant-owner",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/nestjs/restaurant-owner/src",
-  "projectType": "library",
-  "targets": {
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/nestjs/restaurant-owner/**/*.ts"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/nestjs/restaurant-owner"],
-      "options": {
-        "jestConfig": "libs/nestjs/restaurant-owner/jest.config.ts",
-        "passWithNoTests": true
-      }
-    }
-  },
-  "tags": []
+	"name": "nestjs-restaurant-owner",
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/nestjs/restaurant-owner/src",
+	"projectType": "library",
+	"targets": {
+		"lint": {
+			"executor": "@nrwl/linter:eslint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["libs/nestjs/restaurant-owner/**/*.ts"]
+			}
+		},
+		"test": {
+			"executor": "@nrwl/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/libs/nestjs/restaurant-owner"],
+			"options": {
+				"jestConfig": "libs/nestjs/restaurant-owner/jest.config.ts",
+				"passWithNoTests": true
+			}
+		}
+	},
+	"tags": []
 }
