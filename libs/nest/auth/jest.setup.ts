@@ -1,0 +1,1 @@
+process.env.NX_JWT_SECRET = '#Hrp!skPs4X97!Fh';

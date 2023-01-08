@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Types } from "mongoose";
+
 import { RestaurantOwnerRepository } from './restaurant-owner.repository';
 import { RestaurantOwner } from "./schemas/restaurant-owner.schema";
 

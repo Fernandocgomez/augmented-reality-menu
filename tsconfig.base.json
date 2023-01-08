@@ -21,6 +21,7 @@
 				"libs/angular/features/restaurant-owner-dashboard/login/src/index.ts"
 			],
 			"@xreats/login-access-data": ["libs/angular/data-access/login-data-access/src/index.ts"],
+			"@xreats/nest/auth": ["libs/nest/auth/src/index.ts"],
 			"@xreats/nest/restaurant-owner": ["libs/nest/restaurant-owner/src/index.ts"],
 			"@xreats/nest/shared": ["libs/nest/shared/src/index.ts"],
 			"@xreats/nestjs-auth": ["libs/nestjs/auth/src/index.ts"],
