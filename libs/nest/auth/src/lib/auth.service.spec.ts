@@ -8,8 +8,7 @@ import { connect, Connection, Model } from 'mongoose';
 
 import { AuthRepository } from './auth.repository';
 import { AuthService } from './auth.service';
-import { RestaurantOwner, RestaurantOwnerSchema } from '@xreats/nest/shared';
-import { CreateRestaurantOwnerDtoStub } from './test/create-restaurant-owner.dto.stub';
+import { RestaurantOwner, RestaurantOwnerSchema, CreateRestaurantOwnerDtoStub } from '@xreats/nest/shared';
 
 describe('AuthService', () => {
 	let service: AuthService;

@@ -1,4 +1,4 @@
-import { CreateRestaurantOwnerDto } from "@xreats/nest/shared";
+import { CreateRestaurantOwnerDto } from "./../dtos/create-restaurant-owner.dto";
 
 export const CreateRestaurantOwnerDtoStub = (): CreateRestaurantOwnerDto => {
     return {
