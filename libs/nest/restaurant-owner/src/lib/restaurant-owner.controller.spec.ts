@@ -1,5 +1,6 @@
 import { getModelToken } from "@nestjs/mongoose";
 import { Test, TestingModule } from '@nestjs/testing';
+import { BcryptService } from "@xreats/nest/bcrypt";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import { connect, Connection, Model } from "mongoose";
 
@@ -29,8 +30,9 @@ describe('RestaurantOwnerController', () => {
             providers: [
                 RestaurantOwnerService,
                 RestaurantOwnerRepository,
-                { provide: getModelToken(RestaurantOwner.name), useValue: restaurantOwnerModel }
-            ]
+                { provide: getModelToken(RestaurantOwner.name), useValue: restaurantOwnerModel },
+                BcryptService,
+            ],
 		}).compile();
 
 		controller = module.get<RestaurantOwnerController>(RestaurantOwnerController);

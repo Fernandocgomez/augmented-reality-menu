@@ -1,16 +1,20 @@
 import { Injectable } from "@nestjs/common";
+import { BcryptService } from '@xreats/nest/bcrypt';
 
 import { RestaurantOwnerRepository } from './restaurant-owner.repository';
 import { RestaurantOwner } from "./schemas/restaurant-owner.schema";
 
-
 @Injectable()
 export class RestaurantOwnerService {
 
-    constructor(private readonly restaurantOwnerRepository: RestaurantOwnerRepository) {}
+    constructor(
+        private readonly restaurantOwnerRepository: RestaurantOwnerRepository,
+        private readonly bcryptService: BcryptService
+    ) {}
 
     async create(username: string, password: string) {
-        const createdRestaurantOwner = await this.restaurantOwnerRepository.create({username, password});
+        const hashedPassword = await this.bcryptService.hash(password);
+        const createdRestaurantOwner = await this.restaurantOwnerRepository.create({username, password: hashedPassword});
 
         return await this.removeSensitiveProperties(createdRestaurantOwner);
     }
