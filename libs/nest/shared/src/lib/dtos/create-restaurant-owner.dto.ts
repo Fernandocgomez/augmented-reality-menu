@@ -5,11 +5,11 @@ export class CreateRestaurantOwnerDto {
   @Matches(/^[a-z0-9]*$/, {
     message: 'Username must be lowercase and alphanumeric',
   })
-  username: string;
+  username!: string;
 
   @Length(8, 20)
   @Matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/, {
     message: 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character(!@#$%^&*)',
   })
-  password: string;
+  password!: string;
 }

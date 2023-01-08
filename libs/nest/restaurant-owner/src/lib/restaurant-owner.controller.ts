@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, UsePipes, ValidationPipe } from "@nestjs/common";
 import { SkipJwtAuthGuard } from '@xreats/nest/shared';
 
-import { CreateRestaurantOwnerDto } from "./dtos/create-restaurant-owner.dto";
+import { CreateRestaurantOwnerDto } from "@xreats/nest/shared";
 import { RestaurantOwnerService } from "./restaurant-owner.service";
 
 @Controller('restaurant-owners')
