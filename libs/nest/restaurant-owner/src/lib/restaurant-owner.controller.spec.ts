@@ -1,19 +1,15 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from "@nestjs/mongoose";
-
+import { Test, TestingModule } from '@nestjs/testing';
 import { MongoMemoryServer } from "mongodb-memory-server";
-import { Connection, connect, Model } from "mongoose";
+import { connect, Connection, Model } from "mongoose";
 
-import { RestaurantOwnerSchema, RestaurantOwner } from './schemas/restaurant-owner.schema';
-
-import { RestaurantOwnerController } from './restaurant-owner.controller';
-
-import { RestaurantOwnerService } from './restaurant-owner.service';
-
-import { CreateRestaurantOwnerDtoStub } from './test/create-restaurant-owner.dto.stub';
-import { RestaurantOwnerRepository } from './restaurant-owner.repository';
 import { RestaurantOwnerAlreadyExistException } from './exceptions/restaurant-already-exist.exception';
 import { RestaurantOwnerNotFoundException } from './exceptions/restaurant-owner-not-found.exception';
+import { RestaurantOwnerController } from './restaurant-owner.controller';
+import { RestaurantOwnerRepository } from './restaurant-owner.repository';
+import { RestaurantOwnerService } from './restaurant-owner.service';
+import { RestaurantOwner, RestaurantOwnerSchema } from './schemas/restaurant-owner.schema';
+import { CreateRestaurantOwnerDtoStub } from './test/create-restaurant-owner.dto.stub';
 
 describe('RestaurantOwnerController', () => {
 	let controller: RestaurantOwnerController;
@@ -75,7 +71,7 @@ describe('RestaurantOwnerController', () => {
         });
 
         it('should throw a RestaurantOwnerAlreadyExistException if the username is already taken', async () => {
-            await (new restaurantOwnerModel(CreateRestaurantOwnerDtoStub())).save()
+            await (new restaurantOwnerModel(CreateRestaurantOwnerDtoStub())).save();
 
             await expect(controller.create(CreateRestaurantOwnerDtoStub()))
                 .rejects

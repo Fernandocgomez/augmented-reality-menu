@@ -13,6 +13,5 @@ import { RestaurantOwner, RestaurantOwnerSchema } from './schemas/restaurant-own
 	],
 	controllers: [RestaurantOwnerController],
 	providers: [RestaurantOwnerService, RestaurantOwnerRepository],
-	exports: [],
 })
 export class RestaurantOwnerModule {}

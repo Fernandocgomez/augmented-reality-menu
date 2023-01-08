@@ -8,6 +8,7 @@
 		"angular-ui-material": "libs/angular/ui/material",
 		"angular-ui-ui-alerts": "libs/angular/ui/ui-alerts",
 		"angular-ui-ui-navigation": "libs/angular/ui/ui-navigation",
+		"nest-auth": "libs/nest/auth",
 		"nest-restaurant-owner": "libs/nest/restaurant-owner",
 		"nest-shared": "libs/nest/shared",
 		"nestjs-bcrypt": "libs/nestjs/bcrypt",
