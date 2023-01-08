@@ -1,6 +1,7 @@
 import { JwtService } from '@nestjs/jwt';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
+import { BcryptService } from '@xreats/nest/bcrypt';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { Model } from 'mongoose';
 import { connect, Connection } from 'mongoose';
@@ -28,7 +29,8 @@ describe('AuthController', () => {
                 AuthService,
                 JwtService,
                 AuthRepository,
-                { provide: getModelToken(RestaurantOwner.name), useValue: restaurantOwnerModel }
+                { provide: getModelToken(RestaurantOwner.name), useValue: restaurantOwnerModel },
+                BcryptService
             ],
         }).compile();
 

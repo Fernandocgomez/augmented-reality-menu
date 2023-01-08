@@ -1,15 +1,6 @@
-import { 
-    Body, 
-    Controller, 
-    Post,
-    Get,
-    UsePipes,
-	ValidationPipe,
-    Param, 
-} from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, UsePipes, ValidationPipe } from "@nestjs/common";
 
 import { CreateRestaurantOwnerDto } from "./dtos/create-restaurant-owner.dto";
-
 import { RestaurantOwnerService } from "./restaurant-owner.service";
 
 @Controller('restaurant-owners')

@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
-import { JwtModule, JwtService } from '@nestjs/jwt';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { LocalStrategy } from './passport-strategies/local.strategy';
-import { MongooseModule } from '@nestjs/mongoose';
-import { RestaurantOwnerSchema, RestaurantOwner } from './schemas/restaurant-owner.schema';
-import { AuthRepository } from './auth.repository';
-import { JwtStrategy } from './passport-strategies/jwt.strategy';
 import { APP_GUARD } from '@nestjs/core';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { MongooseModule } from '@nestjs/mongoose';
+import { BcryptModule } from '@xreats/nest/bcrypt';
+
+import { AuthController } from './auth.controller';
+import { AuthRepository } from './auth.repository';
+import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { JwtStrategy } from './passport-strategies/jwt.strategy';
+import { LocalStrategy } from './passport-strategies/local.strategy';
+import { RestaurantOwner, RestaurantOwnerSchema } from './schemas/restaurant-owner.schema';
 
 const GlobalJwtAuthGuard = {
 	provide: APP_GUARD,
@@ -38,6 +40,7 @@ const GlobalJwtAuthGuard = {
 				schema: RestaurantOwnerSchema,
 			},
 		]),
+		BcryptModule
 	],
 })
 export class AuthModule {}

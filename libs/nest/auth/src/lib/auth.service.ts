@@ -1,5 +1,7 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { BcryptService } from '@xreats/nest/bcrypt';
+
 import { AuthRepository } from './auth.repository';
 import { RestaurantOwner } from './schemas/restaurant-owner.schema';
 
@@ -8,16 +10,19 @@ export class AuthService {
     constructor(
         private readonly jwtService: JwtService,
         private readonly authRepository: AuthRepository,
+        private readonly bcryptService: BcryptService
     ) {}
 
-    async validateRestaurantOwner(username: string, password: string) {
+    async validateRestaurantOwner(username: string, rawPassword: string) {
         const restaurantOwner = await this.authRepository.findByUsername(username);
 
         if(!restaurantOwner) {
             throw new UnauthorizedException('Invalid credentials');
         };
 
-        if(restaurantOwner.password !== password) {
+        const isPasswordValid = await this.bcryptService.compare(rawPassword, restaurantOwner.password);
+
+        if(!isPasswordValid) {
             throw new UnauthorizedException('Invalid credentials');
         };
 

@@ -2,6 +2,7 @@ import { UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
+import { BcryptService } from '@xreats/nest/bcrypt';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { connect, Connection, Model } from 'mongoose';
 
@@ -12,6 +13,7 @@ import { CreateRestaurantOwnerDtoStub } from './test/create-restaurant-owner.dto
 
 describe('AuthService', () => {
 	let service: AuthService;
+	let bcryptService: BcryptService;
 	let mongoServer: MongoMemoryServer;
 	let mongoConnection: Connection;
 	let restaurantOwnerModel: Model<RestaurantOwner>;
@@ -31,9 +33,11 @@ describe('AuthService', () => {
 				JwtService,
 				AuthRepository,
 				{ provide: getModelToken(RestaurantOwner.name), useValue: restaurantOwnerModel },
+				BcryptService
 			],
 		}).compile();
 
+		bcryptService = module.get<BcryptService>(BcryptService);
 		service = module.get<AuthService>(AuthService);
 	});
 
@@ -60,7 +64,8 @@ describe('AuthService', () => {
 		const { username, password } = CreateRestaurantOwnerDtoStub();
 
 		beforeEach(async () => {
-			await new restaurantOwnerModel(CreateRestaurantOwnerDtoStub()).save();
+			const hashedPassword = await bcryptService.hash(password);
+			await new restaurantOwnerModel({ username, password: hashedPassword }).save();
 		});
 
 		it('should return the restaurant owner when the credentials are valid', async () => {
