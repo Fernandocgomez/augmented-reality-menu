@@ -9,7 +9,7 @@ import { connect, Connection } from 'mongoose';
 import { AuthController } from './auth.controller';
 import { AuthRepository } from './auth.repository';
 import { AuthService } from './auth.service';
-import { RestaurantOwner, RestaurantOwnerSchema } from './schemas/restaurant-owner.schema';
+import { RestaurantOwner, RestaurantOwnerSchema } from '@xreats/nest/shared';
 
 describe('AuthController', () => {
     let controller: AuthController;

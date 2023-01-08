@@ -1,5 +1,4 @@
-
-import { RestaurantOwner } from './../schemas/restaurant-owner.schema';
+import { RestaurantOwner } from '@xreats/nest/shared';
 
 export class LoggedInRestaurantOwnerDto {
     access_token: string;

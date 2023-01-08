@@ -3,7 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { BcryptService } from '@xreats/nest/bcrypt';
 
 import { AuthRepository } from './auth.repository';
-import { RestaurantOwner } from './schemas/restaurant-owner.schema';
+import { RestaurantOwner } from '@xreats/nest/shared';
 
 @Injectable()
 export class AuthService {

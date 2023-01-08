@@ -7,10 +7,10 @@ export class RestaurantOwner extends Document {
     unique: true,
     immutable: true
   })
-  username: string;
+  username!: string;
 
   @Prop()
-  password: string;
+  password!: string;
 }
 
 export const RestaurantOwnerSchema = SchemaFactory.createForClass(RestaurantOwner);
