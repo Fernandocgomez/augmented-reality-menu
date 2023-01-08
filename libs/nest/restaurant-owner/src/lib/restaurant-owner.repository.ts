@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { RestaurantOwner } from './schemas/restaurant-owner.schema';
+import { RestaurantOwner } from '@xreats/nest/shared';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { RestaurantOwnerAlreadyExistException } from './exceptions/restaurant-already-exist.exception';
