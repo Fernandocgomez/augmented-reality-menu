@@ -5,7 +5,7 @@ import { BcryptModule } from '@xreats/nest/bcrypt';
 import { RestaurantOwnerController } from './restaurant-owner.controller';
 import { RestaurantOwnerRepository } from './restaurant-owner.repository';
 import { RestaurantOwnerService } from './restaurant-owner.service';
-import { RestaurantOwner, RestaurantOwnerSchema } from './schemas/restaurant-owner.schema';
+import { RestaurantOwner, RestaurantOwnerSchema } from '@xreats/nest/shared';
 
 @Module({
 	imports: [

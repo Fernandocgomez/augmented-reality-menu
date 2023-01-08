@@ -1,4 +1,4 @@
-import { CreateRestaurantOwnerDto } from "../dto/create-restaurant-owner.dto";
+import { CreateRestaurantOwnerDto } from "./../dtos/create-restaurant-owner.dto";
 
 export const CreateRestaurantOwnerDtoStub = (): CreateRestaurantOwnerDto => {
     return {

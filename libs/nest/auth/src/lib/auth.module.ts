@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { JwtStrategy } from './passport-strategies/jwt.strategy';
 import { LocalStrategy } from './passport-strategies/local.strategy';
-import { RestaurantOwner, RestaurantOwnerSchema } from './schemas/restaurant-owner.schema';
+import { RestaurantOwner, RestaurantOwnerSchema } from '@xreats/nest/shared';
 
 const GlobalJwtAuthGuard = {
 	provide: APP_GUARD,

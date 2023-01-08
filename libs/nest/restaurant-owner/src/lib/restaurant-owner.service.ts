@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { BcryptService } from '@xreats/nest/bcrypt';
 
 import { RestaurantOwnerRepository } from './restaurant-owner.repository';
-import { RestaurantOwner } from "./schemas/restaurant-owner.schema";
+import { RestaurantOwner } from "@xreats/nest/shared";
 
 @Injectable()
 export class RestaurantOwnerService {

@@ -3,7 +3,7 @@ import { AuthService } from "./auth.service";
 import { LoggedInRestaurantOwnerDto } from './dto/logged-in-restaurant-owner.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { SkipJwtAuthGuard } from '@xreats/nest/shared';
-import { RestaurantOwner } from './schemas/restaurant-owner.schema';
+import { RestaurantOwner } from '@xreats/nest/shared';
 
 @Controller('auth')
 export class AuthController {
