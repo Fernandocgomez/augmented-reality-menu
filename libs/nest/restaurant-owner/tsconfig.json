@@ -2,9 +2,6 @@
 	"extends": "../../../tsconfig.base.json",
 	"compilerOptions": {
 		"module": "commonjs",
-		"paths": {
-			"@xreats/nest/bcrypt": ["libs/nest/bcrypt/src/index.ts"],
-		}
 	},
 	"files": [],
 	"include": [],

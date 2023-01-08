@@ -12,7 +12,16 @@ class HttpExceptionFilter implements ExceptionFilter {
 		const request = ctx.getRequest<Request>();
 		const status = exception.getStatus();
 		const errorName = exception.name;
-		const message = exception.getResponse().message;
+		const exceptionResponse = exception.getResponse();
+		let message;
+
+		if(typeof exceptionResponse === 'string') {
+			message = exceptionResponse;
+		};
+
+		if(typeof exceptionResponse === 'object') {
+			message = exceptionResponse.message;
+		};
 
 		const httpExceptionResponse: HttpExceptionResponseInterface = {
 			statusCode: status,
