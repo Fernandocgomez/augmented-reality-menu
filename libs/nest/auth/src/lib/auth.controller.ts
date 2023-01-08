@@ -2,7 +2,7 @@ import { Controller, Post, Request, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LoggedInRestaurantOwnerDto } from './dto/logged-in-restaurant-owner.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
-import { SkipJwtAuthGuard } from './decorators/skip-jwt-auth-guard.decorator';
+import { SkipJwtAuthGuard } from '@xreats/nest/shared';
 import { RestaurantOwner } from './schemas/restaurant-owner.schema';
 
 @Controller('auth')
