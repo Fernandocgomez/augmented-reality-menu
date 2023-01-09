@@ -29,13 +29,50 @@ export class AuthService {
         return await this.removeSensitiveProperties(restaurantOwner);
     }
 
-    async getJsonWebToken(user: RestaurantOwner) {
+    async getJsonWebToken(user: Partial<RestaurantOwner>) {
         const payload = { username: user.username, sub: user._id };
 
 		return this.jwtService.sign(payload, {
             secret: process.env.NX_JWT_SECRET,
         });
     }
+
+    async validateToken(token: string)  {
+		const decodedToken = await this.jwtService.decode(token);
+
+		if(!decodedToken) {
+			return {
+				statusCode: 201,
+				message: ['Invalid token'],
+				isTokenValid: false,
+				restaurantOwner: null
+			}
+		}
+
+		const restaurantOwner = await this.authRepository.findById(
+			decodedToken.sub
+		);
+
+        const restaurantOwnerWithSensitivePropertiesRemoved = await this.removeSensitiveProperties(restaurantOwner);
+
+		return this.jwtService.verifyAsync(token, { secret: process.env.NX_JWT_SECRET })
+        .then(() => {
+            return {
+                statusCode: 201,
+                message: ['Valid token'],
+                isTokenValid: true,
+				restaurantOwner: restaurantOwnerWithSensitivePropertiesRemoved,
+            }
+        })
+        .catch(() => {
+            return {
+                statusCode: 201,
+                message: ['Invalid token'],
+                isTokenValid: false,
+				restaurantOwner: null
+            }
+        })
+	}
 
     private async removeSensitiveProperties(
         restaurantOwner: RestaurantOwner

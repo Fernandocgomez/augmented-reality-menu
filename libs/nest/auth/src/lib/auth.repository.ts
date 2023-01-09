@@ -20,4 +20,14 @@ export class AuthRepository {
 
 		return restaurantOwner.toObject<RestaurantOwner>();
 	}
+
+	async findById(id: string) {
+		const restaurantOwner = await this.restaurantOwnerModel.findOne({ _id: id });
+
+		if (!restaurantOwner) {
+			throw new UnauthorizedException('Invalid credentials');
+		}
+
+		return restaurantOwner.toObject<RestaurantOwner>();
+	}
 }

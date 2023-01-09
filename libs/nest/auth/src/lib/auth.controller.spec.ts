@@ -2,6 +2,8 @@ import { JwtService } from '@nestjs/jwt';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { BcryptService } from '@xreats/nest/bcrypt';
+import { CreateRestaurantOwnerDtoStub, RestaurantOwner, RestaurantOwnerSchema } from '@xreats/nest/shared';
+
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { Model } from 'mongoose';
 import { connect, Connection } from 'mongoose';
@@ -9,10 +11,13 @@ import { connect, Connection } from 'mongoose';
 import { AuthController } from './auth.controller';
 import { AuthRepository } from './auth.repository';
 import { AuthService } from './auth.service';
-import { RestaurantOwner, RestaurantOwnerSchema } from '@xreats/nest/shared';
+import { ValidateJwtResponseDto } from './dto/validate-jwt-response.dto';
 
 describe('AuthController', () => {
     let controller: AuthController;
+    let authService: AuthService;
+    let bcryptService: BcryptService;
+
     let mongoServer: MongoMemoryServer;
     let mongoConnection: Connection;
     let restaurantOwnerModel: Model<RestaurantOwner>;
@@ -35,6 +40,8 @@ describe('AuthController', () => {
         }).compile();
 
         controller = module.get<AuthController>(AuthController);
+        authService = module.get<AuthService>(AuthService);
+        bcryptService = module.get<BcryptService>(BcryptService);
     });
 
     afterAll(async () => {
@@ -88,5 +95,80 @@ describe('AuthController', () => {
             expect(response.restaurantOwner.password).toBeUndefined();
         });
     });
+
+    describe('validateToken', () => {
+
+        describe('when the token is valid', () => {
+            it('should return an instance of ValidateJwtResponseDto with the property isTokenValid equals to true', async () => {
+                const { username, password } = CreateRestaurantOwnerDtoStub();
+                const hashedPassword = await bcryptService.hash(password);
+                const restaurantOwner: Partial<RestaurantOwner> = await new restaurantOwnerModel({ username, password: hashedPassword }).save();
+                const jwtToken = await authService.getJsonWebToken(restaurantOwner);
+                const body = { access_token: jwtToken };
+    
+                const response = await controller.validateToken(body);
+    
+                expect(response).toBeInstanceOf(ValidateJwtResponseDto);
+                expect(response.isTokenValid).toBeTruthy();
+            });
+    
+            it('should return an instance of ValidateJwtResponseDto with the property restaurantOwner.username equals to restaurant owner username', async () => {
+                const { username, password } = CreateRestaurantOwnerDtoStub();
+                const hashedPassword = await bcryptService.hash(password);
+                const restaurantOwner: Partial<RestaurantOwner> = await new restaurantOwnerModel({ username, password: hashedPassword }).save();
+                const jwtToken = await authService.getJsonWebToken(restaurantOwner);
+                const body = { access_token: jwtToken };
+    
+                const response = await controller.validateToken(body);
+    
+                expect(response).toBeInstanceOf(ValidateJwtResponseDto);
+                expect(response.restaurantOwner.username).toBe(username);
+            });
+
+            it('should return an instance of ValidateJwtResponseDto with the property message[0] equals to "Valid token"', async () => {
+                const { username, password } = CreateRestaurantOwnerDtoStub();
+                const hashedPassword = await bcryptService.hash(password);
+                const restaurantOwner: Partial<RestaurantOwner> = await new restaurantOwnerModel({ username, password: hashedPassword }).save();
+                const jwtToken = await authService.getJsonWebToken(restaurantOwner);
+                const body = { access_token: jwtToken };
+    
+                const response = await controller.validateToken(body);
+    
+                expect(response).toBeInstanceOf(ValidateJwtResponseDto);
+                expect(response.message[0]).toBe('Valid token');
+            });
+        });
+
+
+        describe('when the token is invalid', () => {
+            it('should return an instance of ValidateJwtResponseDto with the property isTokenValid equals to false', async () => {
+                const body = { access_token: 'invalidToken' };
+    
+                const response = await controller.validateToken(body);
+    
+                expect(response).toBeInstanceOf(ValidateJwtResponseDto);
+                expect(response.isTokenValid).toBeFalsy();
+            });
+    
+            it('should return an instance of ValidateJwtResponseDto with the property restaurantOwner equals to null', async () => {
+                const body = { access_token: 'invalidToken' };
+    
+                const response = await controller.validateToken(body);
+    
+                expect(response).toBeInstanceOf(ValidateJwtResponseDto);
+                expect(response.restaurantOwner).toBe(null);
+            });
+
+            it('should return an instance of ValidateJwtResponseDto with the property message[0] equals to "Invalid token"', async () => {
+                const body = { access_token: 'invalidToken' };
+    
+                const response = await controller.validateToken(body);
+    
+                expect(response).toBeInstanceOf(ValidateJwtResponseDto);
+                expect(response.message[0]).toBe('Invalid token');
+            });
+
+        });
+    })
 
 });

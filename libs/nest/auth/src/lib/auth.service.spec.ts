@@ -13,6 +13,7 @@ import { RestaurantOwner, RestaurantOwnerSchema, CreateRestaurantOwnerDtoStub } 
 describe('AuthService', () => {
 	let service: AuthService;
 	let bcryptService: BcryptService;
+
 	let mongoServer: MongoMemoryServer;
 	let mongoConnection: Connection;
 	let restaurantOwnerModel: Model<RestaurantOwner>;
@@ -53,10 +54,6 @@ describe('AuthService', () => {
 			const collection = collections[key];
 			await collection.deleteMany({});
 		}
-	});
-
-	it('should be defined', () => {
-		expect(service).toBeDefined();
 	});
 
 	describe('validateRestaurantOwner', () => {
@@ -108,4 +105,26 @@ describe('AuthService', () => {
             expect(typeof jsonWebToken).toBe('string');
 		});
 	});
+
+	describe('validateToken', () => {
+		it('should return an object with the property isTokenValid equals to true when the token passed is valid', async () => {
+			const { username, password } = CreateRestaurantOwnerDtoStub();
+			const hashedPassword = await bcryptService.hash(password);
+			const restaurantOwner = await new restaurantOwnerModel({ username, password: hashedPassword }).save();
+			const jwtToken = await service.getJsonWebToken(restaurantOwner);
+
+			const result = await service.validateToken(jwtToken);
+
+			expect(result.isTokenValid).toBeTruthy();
+		});
+
+		it('should return an object with the property isTokenValid equals to false when the token passed is invalid', async () => {
+			const jwtToken = 'invalidToken';
+
+			const result = await service.validateToken(jwtToken);
+
+			expect(result.isTokenValid).toBeFalsy();
+		});
+	});
+
 });

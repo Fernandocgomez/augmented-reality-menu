@@ -1,9 +1,11 @@
-import { Controller, Post, Request, UseGuards } from "@nestjs/common";
+import { Body, Controller, Post, Request, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LoggedInRestaurantOwnerDto } from './dto/logged-in-restaurant-owner.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { SkipJwtAuthGuard } from '@xreats/nest/shared';
 import { RestaurantOwner } from '@xreats/nest/shared';
+import { JwtDto } from "./dto/jwt.dto";
+import { ValidateJwtResponseDto } from './dto/validate-jwt-response.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -22,5 +24,15 @@ export class AuthController {
             access_token, 
             restaurantOwner
         });
+    }
+
+    @SkipJwtAuthGuard()
+    @Post('validate-token')
+    async validateToken(
+        @Body() validateJwtDto: JwtDto
+    ) {
+        return new ValidateJwtResponseDto(
+            await this.authService.validateToken(validateJwtDto.access_token)
+        );
     }
 }
