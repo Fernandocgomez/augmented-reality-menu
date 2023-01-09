@@ -1,12 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { ValidateTokenResponseInterface } from '@xreats/shared-models';
 
 import { PartialRestaurantOwnerType } from '../types/partial-restaurant-owner.type';
-
-import { RestaurantOwnerService } from './restaurant-owner.service';
-
 import { RestaurantOwnerTransformerUtility } from './../utilities/restaurant-owner-transformer.utility';
-import { ValidateTokenResponseInterface } from '@xreats/shared-models';
+import { RestaurantOwnerService } from './restaurant-owner.service';
 
 @Injectable()
 export class AuthService {
