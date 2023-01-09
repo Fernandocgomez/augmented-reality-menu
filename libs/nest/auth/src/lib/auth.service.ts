@@ -3,10 +3,12 @@ import { JwtService } from "@nestjs/jwt";
 import { BcryptService } from '@xreats/nest/bcrypt';
 
 import { AuthRepository } from './auth.repository';
-import { RestaurantOwner } from '@xreats/nest/shared';
+import { RestaurantOwner, RestaurantOwnerTransformerUtility } from '@xreats/nest/shared';
 
 @Injectable()
 export class AuthService {
+    private restaurantOwnerTransformerUtility = new RestaurantOwnerTransformerUtility();
+
     constructor(
         private readonly jwtService: JwtService,
         private readonly authRepository: AuthRepository,
@@ -26,7 +28,7 @@ export class AuthService {
             throw new UnauthorizedException('Invalid credentials');
         };
 
-        return await this.removeSensitiveProperties(restaurantOwner);
+        return this.restaurantOwnerTransformerUtility.removeSensitiveProperties(restaurantOwner);
     }
 
     async getJsonWebToken(user: Partial<RestaurantOwner>) {
@@ -53,15 +55,13 @@ export class AuthService {
 			decodedToken.sub
 		);
 
-        const restaurantOwnerWithSensitivePropertiesRemoved = await this.removeSensitiveProperties(restaurantOwner);
-
 		return this.jwtService.verifyAsync(token, { secret: process.env.NX_JWT_SECRET })
         .then(() => {
             return {
                 statusCode: 201,
                 message: ['Valid token'],
                 isTokenValid: true,
-				restaurantOwner: restaurantOwnerWithSensitivePropertiesRemoved,
+				restaurantOwner: this.restaurantOwnerTransformerUtility.removeSensitiveProperties(restaurantOwner),
             }
         })
         .catch(() => {
@@ -73,13 +73,4 @@ export class AuthService {
             }
         })
 	}
-
-    private async removeSensitiveProperties(
-        restaurantOwner: RestaurantOwner
-    ): Promise<Partial<RestaurantOwner>> {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { password, __v, ...rest } = await restaurantOwner;
-
-		return await rest;
-    }
 };

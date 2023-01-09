@@ -3,14 +3,14 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class RestaurantOwner extends Document {
-  @Prop({
-    unique: true,
-    immutable: true
-  })
-  username!: string;
+	@Prop({
+		unique: true,
+		immutable: true,
+	})
+	username!: string;
 
-  @Prop()
-  password!: string;
+	@Prop()
+	password!: string;
 }
 
 export const RestaurantOwnerSchema = SchemaFactory.createForClass(RestaurantOwner);
