@@ -12,6 +12,7 @@
 		"nest-bcrypt": "libs/nest/bcrypt",
 		"nest-restaurant-owner": "libs/nest/restaurant-owner",
 		"nest-shared": "libs/nest/shared",
+		"ng-restaurant-owner-dashboard-feature-login": "libs/ng/restaurant-owner-dashboard/feature-login",
 		"restaurant-owner-dashboard": "apps/restaurant-owner-dashboard",
 		"restaurant-owner-dashboard-e2e": "apps/restaurant-owner-dashboard-e2e",
 		"shared-models": "libs/shared-models",
