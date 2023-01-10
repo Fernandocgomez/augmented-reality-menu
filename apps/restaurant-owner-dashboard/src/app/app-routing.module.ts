@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
-      import('@xreats/feature-login').then((m) => m.LoginModule),
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
+      import('@xreats/ng/restaurant-owner-dashboard/feature-login').then((m) => m.FeatureLoginModule),
   },
   {
     path: '',
