@@ -12,8 +12,6 @@
 		"nest-bcrypt": "libs/nest/bcrypt",
 		"nest-restaurant-owner": "libs/nest/restaurant-owner",
 		"nest-shared": "libs/nest/shared",
-		"nestjs-bcrypt": "libs/nestjs/bcrypt",
-		"nestjs-shared": "libs/nestjs/shared",
 		"restaurant-owner-dashboard": "apps/restaurant-owner-dashboard",
 		"restaurant-owner-dashboard-e2e": "apps/restaurant-owner-dashboard-e2e",
 		"shared-models": "libs/shared-models",
