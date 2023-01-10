@@ -46,7 +46,6 @@
 			"inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
 		}
 	},
-	"defaultProject": "xreats-backend",
 	"namedInputs": {
 		"default": ["{projectRoot}/**/*", "sharedGlobals"],
 		"sharedGlobals": [],
