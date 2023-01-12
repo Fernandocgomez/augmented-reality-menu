@@ -1,0 +1,11 @@
+<div [class]="getTextColor() + ' rounded-lg py-5 px-6 mb-3 text-base inline-flex items-center w-full'"
+    role="alert" [ngClass]="getBackgroundColor()" *ngIf="messages.join().length > 0" data-test="alert">
+    <div class="flex flex-col">
+        <ng-container *ngFor="let message of messages">
+            <div class="flex" data-test="message" *ngIf="message.length > 0">
+                <div [innerHTML]="getIcon()"></div>
+                <span data-test="message-text">{{ message }}</span>
+            </div>
+        </ng-container>
+    </div>
+</div>
