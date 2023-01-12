@@ -16,7 +16,7 @@ describe('LoginFormComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should display the header', () => {
 		expect(component).toBeTruthy();
 	});
 });

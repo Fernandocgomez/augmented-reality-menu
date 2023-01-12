@@ -31,6 +31,7 @@
 				"libs/ng/restaurant-owner-dashboard/feature-login/src/index.ts"
 			],
 			"@xreats/shared-models": ["libs/shared-models/src/index.ts"],
+			"@xreats/ui": ["libs/ng/ui/src/index.ts"],
 			"@xreats/ui/alerts": ["libs/angular/ui/ui-alerts/src/index.ts"],
 			"@xreats/ui/material": ["libs/angular/ui/material/src/index.ts"],
 			"@xreats/ui/navigation": ["libs/angular/ui/ui-navigation/src/index.ts"]

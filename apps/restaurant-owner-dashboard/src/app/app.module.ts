@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { environment } from '../environments/environment';
-
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AuthModule } from '@xreats/data-access/auth';
 
-import { AppComponent } from './app.component';
-
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +33,7 @@ import { AppRoutingModule } from './app-routing.module';
       maxAge: 25,
       logOnly: environment.production,
     }),
+    AuthModule,
   ],
   bootstrap: [AppComponent],
 })
