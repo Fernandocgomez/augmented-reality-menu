@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AlertComponent } from './components/alert/alert.component';
+import { DangerAlertComponent } from './components/danger-alert/danger-alert.component';
 
 @NgModule({
 	imports: [CommonModule],
-	declarations: [AlertComponent],
-    exports: [AlertComponent],
+	declarations: [DangerAlertComponent],
+	exports: [DangerAlertComponent],
 })
 export class UiAlertModule {}
