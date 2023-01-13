@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { loginRoutes } from './lib.routes';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { UiMaterialModule, UiNavigationModule, UiAlertModule } from '@xreats/ui';
+import { LoginFacadeService } from './services/login-facade.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	imports: [
@@ -12,8 +14,13 @@ import { UiMaterialModule, UiNavigationModule, UiAlertModule } from '@xreats/ui'
 		RouterModule.forChild(loginRoutes),
 		UiMaterialModule,
 		UiNavigationModule,
-		UiAlertModule
+		UiAlertModule,
+		FormsModule,
+		ReactiveFormsModule
 	],
 	declarations: [FeatureLoginComponent, LoginFormComponent],
+	providers: [
+		LoginFacadeService,
+	],
 })
 export class FeatureLoginModule {}
