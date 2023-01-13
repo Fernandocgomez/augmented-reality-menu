@@ -10,24 +10,23 @@
                 <div class="flex justify-center mb-4" *ngIf="showLoader$ | async">
                     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                 </div>
-                <ui-danger-alert *ngIf="httpErrorMessages$ | async as httpErrorMessages" [messages]="httpErrorMessages"></ui-danger-alert>
+                <ui-danger-alert *ngIf="httpErrorMessages$ | async as httpErrorMessages"
+                    [messages]="httpErrorMessages"></ui-danger-alert>
                 <mat-form-field appearance="fill">
                     <mat-label>Username</mat-label>
                     <input type="text" matInput placeholder="Username" formControlName="username">
-                    <mat-error data-test="username-error-message" *ngIf="!isUsernameControlValid()">Username can only be composed of lower case letters and numbers</mat-error>
+                    <mat-error data-test="username-error-message" *ngIf="!isUsernameControlValid()">Username can only be
+                        composed of lower case letters and numbers</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" *ngIf="{hidePassword: hidePassword$ | async} as context">
                     <mat-label>Enter your password</mat-label>
                     <input matInput [type]="context.hidePassword ? 'password' : 'text'" formControlName="password">
-                    <mat-error data-test="password-error-message" *ngIf="!isPasswordControlValid()">Password is invalid</mat-error>
-                    <button 
-                        mat-icon-button matSuffix 
-                        (click)="togglePasswordVisibility()" 
-                        [attr.aria-label]="'Hide password'" 
-                        [attr.aria-pressed]="context.hidePassword"
-                        type="button"
-                    >
-                      <mat-icon data-test="eye-icon">{{context.hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error data-test="password-error-message" *ngIf="!isPasswordControlValid()">Password is
+                        invalid</mat-error>
+                    <button mat-icon-button matSuffix (click)="togglePasswordVisibility()"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="context.hidePassword" type="button">
+                        <mat-icon data-test="eye-icon">{{context.hidePassword ? 'visibility_off' :
+                            'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
                 <button mat-flat-button color="primary" type="submit" [disabled]="disabledSubmitButton$ | async">

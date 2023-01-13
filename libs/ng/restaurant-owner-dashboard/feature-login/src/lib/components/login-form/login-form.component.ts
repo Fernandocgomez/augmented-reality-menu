@@ -6,7 +6,6 @@ import { LoginFacadeService } from './../../services/login-facade.service';
 @Component({
 	selector: 'feature-login-form',
 	templateUrl: './login-form.component.html',
-	styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent {
 	loginForm: FormGroup = new FormGroup({
