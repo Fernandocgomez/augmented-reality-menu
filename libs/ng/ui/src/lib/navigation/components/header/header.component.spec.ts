@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { UiMaterialModule } from '@xreats/ui';
 
 import { HeaderComponent } from './header.component';
 
@@ -9,6 +10,7 @@ describe('HeaderComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [HeaderComponent],
+			imports: [UiMaterialModule],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(HeaderComponent);

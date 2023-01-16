@@ -1,10 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { UiMaterialModule } from '@xreats/ui';
 
 import { FooterComponent } from './footer.component';
-
-import { MaterialModule } from '@xreats/ui/material';
-
-import {DatePipe} from '@angular/common';
 
 describe('FooterComponent', () => {
 	let component: FooterComponent;
@@ -13,7 +11,7 @@ describe('FooterComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [FooterComponent],
-			imports: [MaterialModule],
+			imports: [UiMaterialModule],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(FooterComponent);
@@ -31,13 +29,13 @@ describe('FooterComponent', () => {
 		const brandInfo = fixture.nativeElement.querySelector('[data-test="footer-brand-info"]');
 
 		expect(brandInfo.textContent).toContain('2022');
-	})
+	});
 
 	it('should display the current year', () => {
 		const datePipe = new DatePipe('en-US');
 		const currentYear = new Date();
 		const brandInfo = fixture.nativeElement.querySelector('[data-test="footer-brand-info"]');
-	
+
 		expect(brandInfo.textContent).toContain(datePipe.transform(currentYear, 'yyyy'));
 	});
 });

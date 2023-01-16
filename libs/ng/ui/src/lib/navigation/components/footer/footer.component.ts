@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
 			</mat-toolbar>
 		</footer>
 	`,
-	styles: [],
+	styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
 	currentYear = new Date();

@@ -30,7 +30,7 @@ export class LoginEffects {
 					);
 				},
 				onError: (_, error) => {
-					const httpExceptionResponse: LoginActions.LoginFailureResponse = error;
+					const httpExceptionResponse: LoginActions.LoginFailureResponse = error.error;
 
 					return LoginActions.loginRequestFailAction(httpExceptionResponse);
 				},
