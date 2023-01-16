@@ -5,7 +5,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AuthModule } from '@xreats/data-access/auth';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +32,6 @@ import { AppComponent } from './app.component';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    AuthModule,
   ],
   bootstrap: [AppComponent],
 })
