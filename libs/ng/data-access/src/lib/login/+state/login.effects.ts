@@ -1,17 +1,20 @@
 import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoginService } from '../login.service';
-
 import { fetch } from '@nrwl/angular';
-
-import * as LoginActions from './login.actions';
 import { map, tap } from 'rxjs';
+
+import { LoginService } from '../login.service';
+import * as LoginActions from './login.actions';
 
 @Injectable()
 export class LoginEffects {
 	private actions$ = inject(Actions);
 
-	constructor(private readonly loginService: LoginService) {}
+	constructor(
+		private readonly loginService: LoginService,
+		private readonly router: Router,
+	) {}
 
 	loginRequestStart$ = createEffect(() =>
 		this.actions$.pipe(
@@ -33,5 +36,20 @@ export class LoginEffects {
 				},
 			})
 		)
+	);
+
+	loginRequestSuccess$ = createEffect(
+		() =>
+			this.actions$.pipe(
+				ofType(LoginActions.loginRequestSuccessAction),
+				tap((action) => {
+					// this.tokenLocalStorageService.setAccessToken(action.access_token);
+					// this.authFace.dispatchAuthenticatedRestaurantOwnerAction(action.restaurantOwner);
+					this.router.navigate(['/dashboard']);
+				})
+			),
+		{
+			dispatch: false,
+		}
 	);
 }

@@ -1,6 +1,7 @@
 // https://dev.to/jdpearce/how-to-test-five-common-ngrx-effect-patterns-26cb
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { Actions, EffectsMetadata, getEffectsMetadata } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
@@ -22,6 +23,7 @@ describe('LoginEffects', () => {
 
 	let store: MockStore<LoginState>;
 	let loginService: LoginService;
+	let router: Router;
 
 	beforeEach(async () => {
 		TestBed.configureTestingModule({
@@ -36,6 +38,7 @@ describe('LoginEffects', () => {
 
 		loginEffect = TestBed.inject(LoginEffects);
 		loginService = TestBed.inject(LoginService);
+		router = TestBed.inject(Router);
 		metadata = getEffectsMetadata(loginEffect);
 		store = TestBed.inject(MockStore) as MockStore<LoginState>;
 	});
@@ -56,8 +59,10 @@ describe('LoginEffects', () => {
 		});
 
 		it('should emit Login Request Fail action when the service call is unsuccessful', () => {
-			jest.spyOn(loginService, 'login').mockReturnValue(throwError(() => LoginFailureResponseStub()));
-            const action = LoginActions.loginRequestStartAction({ username, password });
+			jest
+				.spyOn(loginService, 'login')
+				.mockReturnValue(throwError(() => LoginFailureResponseStub()));
+			const action = LoginActions.loginRequestStartAction({ username, password });
 
 			actions$ = hot('a', { a: action });
 
@@ -69,7 +74,23 @@ describe('LoginEffects', () => {
 
 	describe('loginRequestSuccess$', () => {
 		it('should not return any action', () => {
-			null;
+			expect(metadata.loginRequestSuccess$).toEqual(
+				expect.objectContaining({
+					dispatch: false,
+				})
+			);
+		});
+
+		it('should navigate to the dashboard', () => {
+			jest.spyOn(router, 'navigate').mockReturnValue(Promise.resolve(true));
+			const action = LoginActions.loginRequestSuccessAction(LoginSuccessResponseStub());
+
+			actions$ = hot('a', { a: action });
+
+			expect(loginEffect.loginRequestSuccess$).toBeObservable(
+				cold('a', { a: LoginActions.loginRequestSuccessAction(LoginSuccessResponseStub()) })
+			);
+			expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
 		});
 
 		// it('should set the JWT in the local storage', () => {
@@ -79,10 +100,5 @@ describe('LoginEffects', () => {
 		// it('should dispatch the AuthenticatedRestaurantOwnerAction', () => {
 		// 	null;
 		// });
-
-		it('should navigate to the dashboard', () => {
-			null;
-		});
 	});
-
 });
