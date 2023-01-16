@@ -9,12 +9,12 @@ import { LoginService } from '../login.service';
 import { LoginFailureResponseStub } from './../testing/login-failure-response.stub';
 import * as LoginActions from './login.actions';
 import { LoginEffects } from './login.effects';
-import { LoginFacade } from './login.facade';
+import { DataAccessLoginFacade } from './login.facade';
 import { initialLoginState, LOGIN_FEATURE_KEY, loginReducer, LoginState } from './login.reducer';
 import * as LoginSelectors from './login.selectors';
 
-describe('LoginFacade', () => {
-	let facade: LoginFacade;
+describe('DataAccessLoginFacade', () => {
+	let facade: DataAccessLoginFacade;
 	let store: Store<LoginState>;
 
     const username = 'username';
@@ -27,7 +27,7 @@ describe('LoginFacade', () => {
 				StoreModule.forFeature(LOGIN_FEATURE_KEY, loginReducer, { initialState: initialLoginState }),
 				EffectsModule.forFeature([LoginEffects]),
 			],
-			providers: [LoginFacade, LoginService],
+			providers: [DataAccessLoginFacade, LoginService],
 		})
 		class FeatureModule {}
 
@@ -38,7 +38,7 @@ describe('LoginFacade', () => {
 
 		TestBed.configureTestingModule({ imports: [RootModule] });
 
-		facade = TestBed.inject(LoginFacade);
+		facade = TestBed.inject(DataAccessLoginFacade);
 		store = TestBed.inject(Store) as MockStore<LoginState>;
 	});
 
