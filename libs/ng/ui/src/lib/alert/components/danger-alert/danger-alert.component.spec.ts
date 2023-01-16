@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { UiMaterialModule } from '@xreats/ui';
 
 import { DangerAlertComponent } from './danger-alert.component';
 
@@ -9,6 +10,7 @@ describe('DangerAlertComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [DangerAlertComponent],
+			imports: [UiMaterialModule],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(DangerAlertComponent);
@@ -22,7 +24,7 @@ describe('DangerAlertComponent', () => {
 				expect(component.getBackgroundColor()).toEqual('bg-red-100');
 			});
 		});
-	
+
 		describe('getTextColor()', () => {
 			it('should return the correct text color', () => {
 				expect(component.getTextColor()).toEqual('text-red-700');

@@ -17,7 +17,7 @@ describe('LoginFormComponent', () => {
 			declarations: [LoginFormComponent],
 			imports: [
 				UiMaterialModule, 
-				NoopAnimationsModule, 
+				NoopAnimationsModule,
 				FormsModule, 
 				ReactiveFormsModule,
 				UiAlertModule
@@ -27,6 +27,8 @@ describe('LoginFormComponent', () => {
 					provide: DataAccessLoginFacade,
 					useValue: {
 						dispatchLoginRequestStartAction: jest.fn(),
+						getHttpErrorMessages: jest.fn().mockReturnValue(of([])),
+						isHttpStateLoading: jest.fn().mockReturnValue(of(false)),
 					},
 				},
 			],

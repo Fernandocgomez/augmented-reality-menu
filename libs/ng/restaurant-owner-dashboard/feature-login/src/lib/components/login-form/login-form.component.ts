@@ -20,9 +20,9 @@ export class LoginFormComponent {
 	
 	constructor(private readonly loginFacadeService: DataAccessLoginFacade) {
 		this.hidePassword$ = of(true);
-		this.httpErrorMessages$ = of([]);
-		this.disabledSubmitButton$ = of(false);
-		this.showLoader$ = of(false);
+		this.httpErrorMessages$ = this.loginFacadeService.getHttpErrorMessages();
+		this.disabledSubmitButton$ = this.loginFacadeService.isHttpStateLoading();
+		this.showLoader$ = this.loginFacadeService.isHttpStateLoading();
 	}
 
 	onSubmit() {
