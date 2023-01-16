@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
+import { JwtLocalStorageService } from '@xreats/ng/shared';
 import { map, tap } from 'rxjs';
 
 import { LoginService } from '../login.service';
@@ -14,6 +15,7 @@ export class LoginEffects {
 	constructor(
 		private readonly loginService: LoginService,
 		private readonly router: Router,
+		private readonly jwtLocalStorageService: JwtLocalStorageService
 	) {}
 
 	loginRequestStart$ = createEffect(() =>
@@ -43,7 +45,7 @@ export class LoginEffects {
 			this.actions$.pipe(
 				ofType(LoginActions.loginRequestSuccessAction),
 				tap((action) => {
-					// this.tokenLocalStorageService.setAccessToken(action.access_token);
+					this.jwtLocalStorageService.setAccessToken(action.access_token);
 					// this.authFace.dispatchAuthenticatedRestaurantOwnerAction(action.restaurantOwner);
 					this.router.navigate(['/dashboard']);
 				})
