@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DataAccessLoginFacade } from '@xreats/ng/data-access';
 import { map, Observable, of } from 'rxjs';
-import { LoginFacadeService } from './../../services/login-facade.service';
 
 @Component({
 	selector: 'feature-login-form',
@@ -18,7 +18,7 @@ export class LoginFormComponent {
 	disabledSubmitButton$: Observable<boolean>;
 	showLoader$: Observable<boolean>;
 	
-	constructor(private readonly loginFacadeService: LoginFacadeService) {
+	constructor(private readonly loginFacadeService: DataAccessLoginFacade) {
 		this.hidePassword$ = of(true);
 		this.httpErrorMessages$ = of([]);
 		this.disabledSubmitButton$ = of(false);
@@ -32,7 +32,7 @@ export class LoginFormComponent {
 
 		const { username, password } = this.loginForm.value;
 
-		this.loginFacadeService.dispatchLoginStartAction(username, password);
+		this.loginFacadeService.dispatchLoginRequestStartAction(username, password);
 	};
 
 	isUsernameControlValid() {

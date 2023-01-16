@@ -1,26 +1,25 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FeatureLoginComponent } from './feature-login.component';
-import { RouterModule } from '@angular/router';
-import { loginRoutes } from './lib.routes';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { UiMaterialModule, UiNavigationModule, UiAlertModule } from '@xreats/ui';
-import { LoginFacadeService } from './services/login-facade.service';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { DataAccessLoginModule } from '@xreats/ng/data-access';
+import { UiAlertModule, UiMaterialModule, UiNavigationModule } from '@xreats/ui';
+
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { FeatureLoginComponent } from './feature-login.component';
+import { loginRoutes } from './lib.routes';
 
 @NgModule({
 	imports: [
-		CommonModule, 
+	CommonModule, 
 		RouterModule.forChild(loginRoutes),
 		UiMaterialModule,
 		UiNavigationModule,
 		UiAlertModule,
 		FormsModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		DataAccessLoginModule,
 	],
 	declarations: [FeatureLoginComponent, LoginFormComponent],
-	providers: [
-		LoginFacadeService,
-	],
 })
 export class FeatureLoginModule {}

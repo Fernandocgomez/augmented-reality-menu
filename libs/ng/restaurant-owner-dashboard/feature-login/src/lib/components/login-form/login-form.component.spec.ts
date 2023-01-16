@@ -1,16 +1,16 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { UiMaterialModule, UiAlertModule } from '@xreats/ui';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DataAccessLoginFacade } from '@xreats/ng/data-access';
+import { UiAlertModule, UiMaterialModule } from '@xreats/ui';
+import { of } from 'rxjs';
 
 import { LoginFormComponent } from './login-form.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginFacadeService } from './../../services/login-facade.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { of } from 'rxjs';
 
 describe('LoginFormComponent', () => {
 	let component: LoginFormComponent;
 	let fixture: ComponentFixture<LoginFormComponent>;
-	let loginFacadeService: LoginFacadeService;
+	let loginFacadeService: DataAccessLoginFacade;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -24,9 +24,9 @@ describe('LoginFormComponent', () => {
 			],
 			providers: [
 				{
-					provide: LoginFacadeService,
+					provide: DataAccessLoginFacade,
 					useValue: {
-						dispatchLoginStartAction: jest.fn(),
+						dispatchLoginRequestStartAction: jest.fn(),
 					},
 				},
 			],
@@ -34,7 +34,7 @@ describe('LoginFormComponent', () => {
 
 		fixture = TestBed.createComponent(LoginFormComponent);
 		component = fixture.componentInstance;
-		loginFacadeService = TestBed.inject(LoginFacadeService);
+		loginFacadeService = TestBed.inject(DataAccessLoginFacade);
 
 		fixture.detectChanges();
 	});
@@ -238,11 +238,11 @@ describe('LoginFormComponent', () => {
 
 			component.onSubmit();
 
-			expect(loginFacadeService.dispatchLoginStartAction).toHaveBeenCalledWith(
+			expect(loginFacadeService.dispatchLoginRequestStartAction).toHaveBeenCalledWith(
 				'username',
 				'password'
 			);
-			expect(loginFacadeService.dispatchLoginStartAction).toHaveBeenCalledTimes(1);
+			expect(loginFacadeService.dispatchLoginRequestStartAction).toHaveBeenCalledTimes(1);
 		});
 	});
 

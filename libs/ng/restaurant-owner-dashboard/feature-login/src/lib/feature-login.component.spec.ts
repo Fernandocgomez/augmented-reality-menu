@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DataAccessLoginFacade } from '@xreats/ng/data-access';
 import { UiAlertModule, UiMaterialModule, UiNavigationModule } from '@xreats/ui';
+
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { FeatureLoginComponent } from './feature-login.component';
 
@@ -10,7 +14,21 @@ describe('FeatureLoginComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [FeatureLoginComponent, LoginFormComponent],
-			imports: [UiMaterialModule, UiNavigationModule, UiAlertModule],
+			imports: [
+				NoopAnimationsModule, 
+				FormsModule, 
+				ReactiveFormsModule,
+				UiMaterialModule, 
+				UiNavigationModule, 
+				UiAlertModule],
+			providers: [
+				{
+					provide: DataAccessLoginFacade,
+					useValue: {
+						dispatchLoginRequestStartAction: jest.fn(),
+					},
+				},
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(FeatureLoginComponent);
