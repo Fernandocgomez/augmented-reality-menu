@@ -61,7 +61,9 @@ describe('LoginEffects', () => {
 		it('should emit Login Request Fail action when the service call is unsuccessful', () => {
 			jest
 				.spyOn(loginService, 'login')
-				.mockReturnValue(throwError(() => LoginFailureResponseStub()));
+				.mockReturnValue(throwError(() => {
+					return {error: LoginFailureResponseStub()};
+				}));
 			const action = LoginActions.loginRequestStartAction({ username, password });
 
 			actions$ = hot('a', { a: action });
