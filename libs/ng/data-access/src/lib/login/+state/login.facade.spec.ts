@@ -4,6 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
 import { MockStore } from '@ngrx/store/testing';
+import { DataAccessAuthFacade } from '../../auth/+state/auth.facade';
 
 import { LoginService } from '../login.service';
 import { LoginFailureResponseStub } from './../testing/login-failure-response.stub';
@@ -17,17 +18,28 @@ describe('DataAccessLoginFacade', () => {
 	let facade: DataAccessLoginFacade;
 	let store: Store<LoginState>;
 
-    const username = 'username';
-    const password = 'password';
+	const username = 'username';
+	const password = 'password';
 
 	beforeEach(() => {
 		@NgModule({
 			imports: [
-                HttpClientTestingModule,
-				StoreModule.forFeature(LOGIN_FEATURE_KEY, loginReducer, { initialState: initialLoginState }),
+				HttpClientTestingModule,
+				StoreModule.forFeature(LOGIN_FEATURE_KEY, loginReducer, {
+					initialState: initialLoginState,
+				}),
 				EffectsModule.forFeature([LoginEffects]),
 			],
-			providers: [DataAccessLoginFacade, LoginService],
+			providers: [
+				DataAccessLoginFacade,
+				LoginService,
+				{
+					provide: DataAccessAuthFacade,
+					useValue: {
+						authenticatedRestaurantOwnerAction: jest.fn(),
+					},
+				},
+			],
 		})
 		class FeatureModule {}
 
@@ -63,54 +75,53 @@ describe('DataAccessLoginFacade', () => {
 		});
 	});
 
-    describe('isHttpStateLoading()', () => {
-        it('should return an observable of type boolean', (done) => {
-            facade.isHttpStateLoading().subscribe((isHttpStateLoading) => {
-                expect(typeof isHttpStateLoading).toEqual('boolean');
-                done();
-            });
-        });
+	describe('isHttpStateLoading()', () => {
+		it('should return an observable of type boolean', (done) => {
+			facade.isHttpStateLoading().subscribe((isHttpStateLoading) => {
+				expect(typeof isHttpStateLoading).toEqual('boolean');
+				done();
+			});
+		});
 
-        it('should emit true when the httpState is equal to "LOADING"', (done) => {
-            store.dispatch(LoginActions.loginRequestStartAction({ username, password}));
+		it('should emit true when the httpState is equal to "LOADING"', (done) => {
+			store.dispatch(LoginActions.loginRequestStartAction({ username, password }));
 
-            facade.isHttpStateLoading().subscribe((isHttpStateLoading) => {
-                expect(isHttpStateLoading).toEqual(true);
-                done();
-            });
-        });
+			facade.isHttpStateLoading().subscribe((isHttpStateLoading) => {
+				expect(isHttpStateLoading).toEqual(true);
+				done();
+			});
+		});
 
-        it('should emit false when the httpState is not "LOADING"', (done) => {
-            facade.isHttpStateLoading().subscribe((isHttpStateLoading) => {
-                expect(isHttpStateLoading).toEqual(false);
-                done();
-            });
-        });
+		it('should emit false when the httpState is not "LOADING"', (done) => {
+			facade.isHttpStateLoading().subscribe((isHttpStateLoading) => {
+				expect(isHttpStateLoading).toEqual(false);
+				done();
+			});
+		});
+	});
 
-    });
+	describe('getHttpErrorMessages()', () => {
+		it('should return an observable of type string[]', (done) => {
+			facade.getHttpErrorMessages().subscribe((httpErrorMessages) => {
+				expect(Array.isArray(httpErrorMessages)).toEqual(true);
+				done();
+			});
+		});
 
-    describe('getHttpErrorMessages()', () => {
-        it('should return an observable of type string[]', (done) => {
-            facade.getHttpErrorMessages().subscribe((httpErrorMessages) => {
-                expect(Array.isArray(httpErrorMessages)).toEqual(true);
-                done();
-            });
-        });
+		it('should return an array of error messages when the httpState is "FAILURE"', (done) => {
+			store.dispatch(LoginActions.loginRequestFailAction(LoginFailureResponseStub()));
 
-        it('should return an array of error messages when the httpState is "FAILURE"', (done) => {
-            store.dispatch(LoginActions.loginRequestFailAction(LoginFailureResponseStub()));
+			facade.getHttpErrorMessages().subscribe((httpErrorMessages) => {
+				expect(httpErrorMessages).toEqual(LoginFailureResponseStub().message);
+				done();
+			});
+		});
 
-            facade.getHttpErrorMessages().subscribe((httpErrorMessages) => {
-                expect(httpErrorMessages).toEqual(LoginFailureResponseStub().message);
-                done();
-            });
-        });
-
-        it('should return an empty array when the httpState is not "FAILURE"', (done) => {
-            facade.getHttpErrorMessages().subscribe((httpErrorMessages) => {
-                expect(httpErrorMessages).toEqual([]);
-                done();
-            });
-        });
-    });
+		it('should return an empty array when the httpState is not "FAILURE"', (done) => {
+			facade.getHttpErrorMessages().subscribe((httpErrorMessages) => {
+				expect(httpErrorMessages).toEqual([]);
+				done();
+			});
+		});
+	});
 });

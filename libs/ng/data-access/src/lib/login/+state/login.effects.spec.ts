@@ -8,6 +8,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { JwtLocalStorageService } from '@xreats/ng/shared';
 import { cold, hot } from 'jasmine-marbles';
 import { of, throwError } from 'rxjs';
+import { DataAccessAuthFacade } from '../../auth/+state/auth.facade';
 
 import { LoginService } from '../login.service';
 import { LoginFailureResponseStub } from './../testing/login-failure-response.stub';
@@ -25,6 +26,7 @@ describe('LoginEffects', () => {
 	let loginService: LoginService;
 	let router: Router;
 	let jwtLocalStorageService: JwtLocalStorageService;
+	let authFace: DataAccessAuthFacade;
 
 	const username = 'username';
 	const password = 'password';
@@ -36,6 +38,14 @@ describe('LoginEffects', () => {
 				LoginEffects,
 				LoginService,
 				JwtLocalStorageService,
+				{
+					provide: DataAccessAuthFacade,
+					useValue: {
+						authenticatedRestaurantOwnerAction: jest.fn(),
+						dispatchUnauthenticatedRestaurantOwnerAction: jest.fn(),
+						validateJwt: jest.fn(),
+					}
+				},
 				provideMockActions(() => actions$),
 				provideMockStore({ initialState: initialLoginState }),
 			],
@@ -46,6 +56,7 @@ describe('LoginEffects', () => {
 		loginService = TestBed.inject(LoginService);
 		router = TestBed.inject(Router);
 		metadata = getEffectsMetadata(loginEffect);
+		authFace = TestBed.inject(DataAccessAuthFacade);
 
 		window.localStorage.clear();
 	});
@@ -100,7 +111,7 @@ describe('LoginEffects', () => {
 			);
 		});
 
-		it('should navigate to the dashboard', () => {
+		it('should navigate to the dashboard page', () => {
 			expect(loginEffect.loginRequestSuccess$).toBeObservable(
 				cold('a', { a: LoginActions.loginRequestSuccessAction(LoginSuccessResponseStub()) })
 			);
@@ -115,8 +126,14 @@ describe('LoginEffects', () => {
 			expect(jwtLocalStorageService.getAccessToken()).toEqual(LoginSuccessResponseStub().access_token);
 		});
 
-		// it('should dispatch the AuthenticatedRestaurantOwnerAction', () => {
-		// 	null;
-		// });
+		it('should dispatch an AuthenticatedRestaurantOwnerAction', () => {
+			jest.spyOn(authFace, 'authenticatedRestaurantOwnerAction').mockImplementation();
+
+			expect(loginEffect.loginRequestSuccess$).toBeObservable(
+				cold('a', { a: LoginActions.loginRequestSuccessAction(LoginSuccessResponseStub()) })
+			);
+			expect(authFace.authenticatedRestaurantOwnerAction).toHaveBeenCalled();
+			expect(authFace.authenticatedRestaurantOwnerAction).toHaveBeenCalledWith(LoginSuccessResponseStub().restaurantOwner);
+		});
 	});
 });
