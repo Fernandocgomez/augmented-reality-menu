@@ -11,7 +11,7 @@ export class DataAccessAuthFacade {
 
 	constructor(private authService: AuthService) {}
 
-	dispatchAuthenticateUser(restaurantOwner: { _id: string; username: string }) {
+	authenticatedRestaurantOwnerAction(restaurantOwner: { _id: string; username: string }) {
 		this.store.dispatch(authenticateRestaurantOwnerAction({ restaurantOwner }));
 	}
 
@@ -24,7 +24,7 @@ export class DataAccessAuthFacade {
             .pipe(
                 tap((response) => {
                     if (response.isTokenValid && response.restaurantOwner) {
-                        this.dispatchAuthenticateUser(response.restaurantOwner);
+                        this.authenticatedRestaurantOwnerAction(response.restaurantOwner);
                     } else {
                         this.dispatchUnauthenticatedRestaurantOwnerAction();
                     }

@@ -5,7 +5,7 @@ import { fetch } from '@nrwl/angular';
 import { JwtLocalStorageService } from '@xreats/ng/shared';
 import { map, tap } from 'rxjs';
 
-// import { DataAccessAuthFacade } from '../../auth/+state/auth.facade';
+import { DataAccessAuthFacade } from '../../auth/+state/auth.facade';
 import { LoginService } from '../login.service';
 import * as LoginActions from './login.actions';
 
@@ -17,7 +17,7 @@ export class LoginEffects {
 		private readonly loginService: LoginService,
 		private readonly router: Router,
 		private readonly jwtLocalStorageService: JwtLocalStorageService,
-		// private readonly authFace: DataAccessAuthFacade
+		private readonly authFace: DataAccessAuthFacade
 	) {}
 
 	loginRequestStart$ = createEffect(() =>
@@ -48,7 +48,7 @@ export class LoginEffects {
 				ofType(LoginActions.loginRequestSuccessAction),
 				tap((action) => {
 					this.jwtLocalStorageService.setAccessToken(action.access_token);
-					// this.authFace.dispatchAuthenticateUser(action.restaurantOwner);
+					this.authFace.authenticatedRestaurantOwnerAction(action.restaurantOwner);
 					this.router.navigate(['/dashboard']);
 				})
 			),

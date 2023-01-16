@@ -50,7 +50,7 @@ describe('DataAccessAuthFacade', () => {
 
 			jest.spyOn(store, 'dispatch');
 
-			facade.dispatchAuthenticateUser(restaurantOwnerStub());
+			facade.authenticatedRestaurantOwnerAction(restaurantOwnerStub());
 
 			expect(store.dispatch).toHaveBeenCalledWith(action);
 		});
