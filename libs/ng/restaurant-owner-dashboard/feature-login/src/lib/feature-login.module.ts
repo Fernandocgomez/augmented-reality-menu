@@ -7,6 +7,7 @@ import { UiAlertModule, UiMaterialModule, UiNavigationModule } from '@xreats/ui'
 
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { FeatureLoginComponent } from './feature-login.component';
+import { LoginGuard } from './guards/login.guard';
 import { loginRoutes } from './lib.routes';
 
 @NgModule({
@@ -21,5 +22,8 @@ import { loginRoutes } from './lib.routes';
 		DataAccessLoginModule,
 	],
 	declarations: [FeatureLoginComponent, LoginFormComponent],
+	providers: [
+		LoginGuard
+	],
 })
 export class FeatureLoginModule {}
