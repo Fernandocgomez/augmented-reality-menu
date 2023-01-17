@@ -15,9 +15,6 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
-			"@xreats/angular/shared": ["libs/angular/shared/src/index.ts"],
-			"@xreats/data-access/auth": ["libs/angular/data-access/auth/src/index.ts"],
-			"@xreats/login-access-data": ["libs/angular/data-access/login-data-access/src/index.ts"],
 			"@xreats/nest/auth": ["libs/nest/auth/src/index.ts"],
 			"@xreats/nest/bcrypt": ["libs/nest/bcrypt/src/index.ts"],
 			"@xreats/nest/restaurant-owner": ["libs/nest/restaurant-owner/src/index.ts"],
@@ -30,10 +27,7 @@
 			],
 			"@xreats/ng/shared": ["libs/ng/shared/src/index.ts"],
 			"@xreats/shared-models": ["libs/shared-models/src/index.ts"],
-			"@xreats/ui": ["libs/ng/ui/src/index.ts"],
-			"@xreats/ui/alerts": ["libs/angular/ui/ui-alerts/src/index.ts"],
-			"@xreats/ui/material": ["libs/angular/ui/material/src/index.ts"],
-			"@xreats/ui/navigation": ["libs/angular/ui/ui-navigation/src/index.ts"]
+			"@xreats/ui": ["libs/ng/ui/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
