@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { DataAccessAuthFacade } from '@xreats/ng/data-access';
 import { JwtLocalStorageService } from '@xreats/ng/shared';
-import { Observable, of, map, tap } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 
 @Injectable()
 export class LoginGuard implements CanActivate {
@@ -21,19 +21,15 @@ export class LoginGuard implements CanActivate {
 
 		return this.authFacade.validateJwt(token).pipe(
 			map((isTokenValid) => {
-				if (isTokenValid) {
-					return false;
-				}
-
-				return true;
+				return !isTokenValid;
 			}),
 			tap((allowAccess) => {
-				if (allowAccess) {
-					this.jwtLocalStorageService.removeAccessToken();
-				} else {
-					this.router.navigate(['/dashboard']);
-				}
+				this.handleSideEffects(allowAccess);
 			})
 		);
+	}
+
+	private handleSideEffects(allowAccess: boolean) {
+		allowAccess ? this.jwtLocalStorageService.removeAccessToken() : this.router.navigate(['/dashboard']);
 	}
 }
