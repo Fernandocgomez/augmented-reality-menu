@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { catchError, map, of, tap } from 'rxjs';
 
-import { AuthService } from './../auth.service';
+import { AuthService, ValidateJwtResponse } from './../auth.service';
 import { authenticateRestaurantOwnerAction, unauthenticatedRestaurantOwnerAction } from './auth.actions';
 
 @Injectable()
@@ -23,11 +23,7 @@ export class DataAccessAuthFacade {
         return this.authService.validateJwt(access_token)
             .pipe(
                 tap((response) => {
-                    if (response.isTokenValid && response.restaurantOwner) {
-                        this.authenticatedRestaurantOwnerAction(response.restaurantOwner);
-                    } else {
-                        this.dispatchUnauthenticatedRestaurantOwnerAction();
-                    }
+                    this.handelValidateJwtResponseSideEffects(response);
                 }),
                 map((response) => {
                     return response.isTokenValid;
@@ -37,5 +33,13 @@ export class DataAccessAuthFacade {
                     return of(false);
                 })
             );
+    }
+
+    private handelValidateJwtResponseSideEffects(response: ValidateJwtResponse) {
+        if (response.isTokenValid && response.restaurantOwner) {
+            this.authenticatedRestaurantOwnerAction(response.restaurantOwner);
+        } else {
+            this.dispatchUnauthenticatedRestaurantOwnerAction();
+        }
     }
 }
