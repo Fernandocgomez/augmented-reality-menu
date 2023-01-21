@@ -3,8 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { BcryptService } from '@xreats/nest/bcrypt';
 
 import { AuthRepository } from './auth.repository';
-import { RestaurantOwner } from '@xreats/nest/shared';
-import { RestaurantOwnerTransformerUtility } from '@xreats/shared-models';
+import { IRestaurantOwner, RestaurantOwnerTransformerUtility } from '@xreats/shared-models';
 
 @Injectable()
 export class AuthService {
@@ -32,7 +31,7 @@ export class AuthService {
         return this.restaurantOwnerTransformerUtility.removeSensitiveProperties(restaurantOwner);
     }
 
-    async getJsonWebToken(user: Partial<RestaurantOwner>) {
+    async getJsonWebToken(user: Partial<IRestaurantOwner>) {
         const payload = { username: user.username, sub: user._id };
 
 		return this.jwtService.sign(payload, {

@@ -4,5 +4,5 @@ export interface IValidateJwtResponse {
     statusCode: number;
     message: string[];
     isTokenValid: boolean;
-    restaurantOwner: Partial<IRestaurantOwner>;
+    restaurantOwner: Partial<IRestaurantOwner> | null;
 }
