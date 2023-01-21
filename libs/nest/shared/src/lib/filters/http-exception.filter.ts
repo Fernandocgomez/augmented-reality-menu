@@ -1,6 +1,5 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
-import { HttpExceptionResponseInterface } from '@xreats/shared-models';
 import { Request, Response } from 'express';
 
 @Catch(HttpException)
@@ -23,7 +22,7 @@ class HttpExceptionFilter implements ExceptionFilter {
 			message = exceptionResponse.message;
 		};
 
-		const httpExceptionResponse: HttpExceptionResponseInterface = {
+		const httpExceptionResponse = {
 			statusCode: status,
 			message: Array.isArray(message) ? message : [message],
 			error: errorName,
