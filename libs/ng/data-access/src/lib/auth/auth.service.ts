@@ -1,15 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-
-export interface ValidateJwtResponse {
-    statusCode: number;
-    message: string[];
-    isTokenValid: boolean;
-    restaurantOwner: {
-        _id: string;
-        username: string;
-    } | null;
-}
+import { IValidateJwtResponse } from "@xreats/shared-models";
 
 @Injectable()
 export class AuthService {
@@ -19,6 +10,6 @@ export class AuthService {
     constructor(private readonly http: HttpClient) {}
 
     validateJwt(access_token: string) {
-        return this.http.post<ValidateJwtResponse>(`${this.xreatsApi}/auth/validate-token`, {access_token});
+        return this.http.post<IValidateJwtResponse>(`${this.xreatsApi}/auth/validate-token`, {access_token});
     }
 }

@@ -1,12 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import { authenticateRestaurantOwnerAction, unauthenticatedRestaurantOwnerAction } from './auth.actions';
+import { IRestaurantOwner } from '@xreats/shared-models';
 
 export const AUTH_FEATURE_KEY = 'auth';
 
 export interface AuthState {
     isAuthenticated: boolean;
-    restaurantOwner: { _id: string; username: string } | null;
+    restaurantOwner: Partial<IRestaurantOwner> | null;
 }
 
 export const initialAuthState: AuthState = {
@@ -14,7 +15,7 @@ export const initialAuthState: AuthState = {
     restaurantOwner: null,
 }
 
-export const authenticateRestaurantOwnerReducer = (state: AuthState, actions: { restaurantOwner: { _id: string; username: string } }): AuthState => {
+export const authenticateRestaurantOwnerReducer = (state: AuthState, actions: { restaurantOwner: Partial<IRestaurantOwner> }): AuthState => {
     return {
         ...state,
         isAuthenticated: true,

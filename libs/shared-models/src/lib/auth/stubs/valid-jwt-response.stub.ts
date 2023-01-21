@@ -1,4 +1,6 @@
-export const validJwtResponseStub = () => {
+import { IValidateJwtResponse } from "../interfaces";
+
+export const validJwtResponseStub = (): IValidateJwtResponse => {
     return {
         statusCode: 201,
         message: ['Valid token'],

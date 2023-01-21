@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { IValidateJwtResponse, IRestaurantOwner } from '@xreats/shared-models';
 import { catchError, map, of, tap } from 'rxjs';
 
-import { AuthService, ValidateJwtResponse } from './../auth.service';
+import { AuthService } from './../auth.service';
 import { authenticateRestaurantOwnerAction, unauthenticatedRestaurantOwnerAction } from './auth.actions';
 
 @Injectable()
@@ -11,7 +12,7 @@ export class DataAccessAuthFacade {
 
 	constructor(private authService: AuthService) {}
 
-	authenticatedRestaurantOwnerAction(restaurantOwner: { _id: string; username: string }) {
+	authenticatedRestaurantOwnerAction(restaurantOwner: Partial<IRestaurantOwner>) {
 		this.store.dispatch(authenticateRestaurantOwnerAction({ restaurantOwner }));
 	}
 
@@ -35,7 +36,7 @@ export class DataAccessAuthFacade {
             );
     }
 
-    private handelValidateJwtResponseSideEffects(response: ValidateJwtResponse) {
+    private handelValidateJwtResponseSideEffects(response: IValidateJwtResponse) {
         if (response.isTokenValid && response.restaurantOwner) {
             this.authenticatedRestaurantOwnerAction(response.restaurantOwner);
         } else {

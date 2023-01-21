@@ -10,10 +10,8 @@ import { AuthService } from '../auth.service';
 import * as AuthActions from './auth.actions';
 import { DataAccessAuthFacade } from './auth.facade';
 import { AUTH_FEATURE_KEY, authReducer, AuthState, initialAuthState } from './auth.reducer';
-import { restaurantOwnerStub } from './../testing/restaurant-owner.stub';
 
-import { validJwtResponseStub } from './../testing/valid-jwt-response.stub';
-import { invalidJwtResponseStub } from './../testing/invalid-jwt-response.stub';
+import { invalidJwtResponseStub, validJwtResponseStub, restaurantOwnerStub } from '@xreats/shared-models';
 
 describe('DataAccessAuthFacade', () => {
 	let facade: DataAccessAuthFacade;
@@ -70,7 +68,8 @@ describe('DataAccessAuthFacade', () => {
 
 	describe('validateJwt()', () => {
 		it('should dispatch authenticateRestaurantOwnerAction if token is valid', (done) => {
-            const action = AuthActions.authenticateRestaurantOwnerAction({ restaurantOwner: validJwtResponseStub().restaurantOwner })
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const action = AuthActions.authenticateRestaurantOwnerAction({ restaurantOwner: validJwtResponseStub().restaurantOwner! })
 			jest.spyOn(authService, 'validateJwt').mockImplementation(() => {
 				return of(validJwtResponseStub());
 			});
