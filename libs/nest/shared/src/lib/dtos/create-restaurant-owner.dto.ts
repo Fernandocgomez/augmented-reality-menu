@@ -1,6 +1,7 @@
+import { ICreateRestaurantOwner } from '@xreats/shared-models';
 import { Length, Matches } from 'class-validator';
 
-export class CreateRestaurantOwnerDto {
+export class CreateRestaurantOwnerDto implements ICreateRestaurantOwner {
   @Length(5, 16)
   @Matches(/^[a-z0-9]*$/, {
     message: 'Username must be lowercase and alphanumeric',

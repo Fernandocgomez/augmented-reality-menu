@@ -1,4 +1,4 @@
-import { CreateRestaurantOwnerDtoStub } from './../test/create-restaurant-owner.dto.stub';
+import { CreateRestaurantOwnerDtoStub } from '../stubs';
 import { RestaurantOwnerTransformerUtility } from './restaurant-owner-transformer.utility';
 
 describe('RestaurantOwnerTransformerUtility', () => {
