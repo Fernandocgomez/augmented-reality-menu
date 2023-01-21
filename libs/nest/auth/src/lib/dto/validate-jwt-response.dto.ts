@@ -1,10 +1,10 @@
-import { RestaurantOwner } from "@xreats/nest/shared";
+import { IRestaurantOwner, IValidateJwtResponse } from "@xreats/shared-models";
 
-export class ValidateJwtResponseDto {
+export class ValidateJwtResponseDto implements IValidateJwtResponse {
     statusCode: number;
     message: string[];
     isTokenValid: boolean;
-    restaurantOwner: Partial<RestaurantOwner>;
+    restaurantOwner: Partial<IRestaurantOwner>;
 
     constructor(data: Partial<ValidateJwtResponseDto>) {
         Object.assign(this, data);

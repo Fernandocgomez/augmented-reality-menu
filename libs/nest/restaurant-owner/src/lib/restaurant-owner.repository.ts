@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { RestaurantOwnerAlreadyExistException } from './exceptions/restaurant-already-exist.exception';
 import { RestaurantOwnerNotFoundException } from './exceptions/restaurant-owner-not-found.exception';
+
 @Injectable()
 export class RestaurantOwnerRepository {
 
