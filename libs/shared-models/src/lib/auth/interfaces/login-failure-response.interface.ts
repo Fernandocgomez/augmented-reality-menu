@@ -1,4 +1,4 @@
-export interface HttpExceptionResponseInterface {
+export interface ILoginFailureResponse {
     statusCode: number;
     message: string[];
     error: string;

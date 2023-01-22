@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 import { JwtLocalStorageService } from '@xreats/ng/shared';
+import { ILoginFailureResponse } from '@xreats/shared-models';
 import { map, tap } from 'rxjs';
 
 import { DataAccessAuthFacade } from '../../auth/+state/auth.facade';
@@ -34,7 +35,7 @@ export class LoginEffects {
 					);
 				},
 				onError: (_, error) => {
-					const httpExceptionResponse: LoginActions.LoginFailureResponse = error.error;
+					const httpExceptionResponse: ILoginFailureResponse = error.error;
 
 					return LoginActions.loginRequestFailAction(httpExceptionResponse);
 				},

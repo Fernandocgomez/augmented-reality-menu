@@ -1,8 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { IRestaurantOwner } from '@xreats/shared-models';
 
 @Schema()
-export class RestaurantOwner extends Document {
+export class RestaurantOwner extends Document implements IRestaurantOwner {
+	_id!: string;
+	
 	@Prop({
 		unique: true,
 		immutable: true,

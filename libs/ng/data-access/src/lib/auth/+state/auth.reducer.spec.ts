@@ -3,7 +3,8 @@ import {
 	initialAuthState,
 	unauthenticatedRestaurantOwnerReducer,
 } from './auth.reducer';
-import { restaurantOwnerStub } from './../testing/restaurant-owner.stub';
+import { restaurantOwnerStub } from '@xreats/shared-models';
+
 
 describe('authenticateRestaurantOwnerReducer', () => {
 	it('should set isAuthenticated to true', () => {

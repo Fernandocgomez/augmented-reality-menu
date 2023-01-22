@@ -9,7 +9,8 @@ import { RestaurantOwnerNotFoundException } from './exceptions/restaurant-owner-
 import { RestaurantOwnerController } from './restaurant-owner.controller';
 import { RestaurantOwnerRepository } from './restaurant-owner.repository';
 import { RestaurantOwnerService } from './restaurant-owner.service';
-import { RestaurantOwner, RestaurantOwnerSchema, CreateRestaurantOwnerDtoStub } from '@xreats/nest/shared';
+import { RestaurantOwner, RestaurantOwnerSchema } from '@xreats/nest/shared';
+import { CreateRestaurantOwnerDtoStub } from '@xreats/shared-models';
 
 describe('RestaurantOwnerController', () => {
 	let controller: RestaurantOwnerController;

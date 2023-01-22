@@ -2,7 +2,8 @@ import { JwtService } from '@nestjs/jwt';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { BcryptService } from '@xreats/nest/bcrypt';
-import { CreateRestaurantOwnerDtoStub, RestaurantOwner, RestaurantOwnerSchema } from '@xreats/nest/shared';
+import { RestaurantOwner, RestaurantOwnerSchema } from '@xreats/nest/shared';
+import { CreateRestaurantOwnerDtoStub } from '@xreats/shared-models';
 
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { Model } from 'mongoose';

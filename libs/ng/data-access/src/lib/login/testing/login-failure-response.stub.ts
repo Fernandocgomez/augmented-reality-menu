@@ -1,4 +1,6 @@
-export const LoginFailureResponseStub = () => {
+import { ILoginFailureResponse } from "@xreats/shared-models";
+
+export const LoginFailureResponseStub = (): ILoginFailureResponse  => {
     return {
         statusCode: 401,
         message: ['Unauthorized'],
