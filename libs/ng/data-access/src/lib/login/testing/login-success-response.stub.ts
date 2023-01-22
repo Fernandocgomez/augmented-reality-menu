@@ -1,4 +1,6 @@
-export const LoginSuccessResponseStub = () => {
+import { ILoggedInRestaurantOwner } from "@xreats/shared-models"
+
+export const LoginSuccessResponseStub = (): ILoggedInRestaurantOwner => {
     return {
         access_token:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRhcXVlcmlhMTAiLCJzdWIiOiI2M2JjOTcwYWMwZTJiMzk3NjFmZWNhZTQiLCJpYXQiOjE2NzM2NjEwNjB9.rdVI951IfqNEq2MgK7zaeCmGD6DzDJNQXGrTYvqOHD4',

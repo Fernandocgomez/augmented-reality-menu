@@ -1,4 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
+import { ILoginFailureResponse } from '@xreats/shared-models';
 
 import * as LoginActions from './login.actions';
 
@@ -25,7 +26,7 @@ export const loginRequestStartReducer = (
 
 export const loginRequestFailReducer = (
   state: LoginState,
-  action: LoginActions.LoginFailureResponse,
+  action: ILoginFailureResponse,
 ): LoginState => {
   return {
     ...state,

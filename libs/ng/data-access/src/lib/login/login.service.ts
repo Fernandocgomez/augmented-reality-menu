@@ -1,10 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-
-interface LoggedInRestaurantOwner {
-    access_token: string;
-    restaurantOwner: { _id: string; username: string; };
-}
+import { ILoggedInRestaurantOwner } from '@xreats/shared-models';
 
 @Injectable()
 export class LoginService {
@@ -13,6 +9,6 @@ export class LoginService {
     constructor(private readonly http: HttpClient) {}
 
     login(username: string, password: string) {
-        return this.http.post<LoggedInRestaurantOwner>(`${this.xreatsApi}/auth/login`, {username, password});
+        return this.http.post<ILoggedInRestaurantOwner>(`${this.xreatsApi}/auth/login`, {username, password});
     };
 }
