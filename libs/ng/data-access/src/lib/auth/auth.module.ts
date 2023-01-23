@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 
 @NgModule({
 	imports: [
-	CommonModule,
+		CommonModule,
 		StoreModule.forFeature(fromAuth.AUTH_FEATURE_KEY, fromAuth.authReducer),
 		HttpClientModule,
 	],

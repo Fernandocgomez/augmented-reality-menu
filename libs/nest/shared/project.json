@@ -20,5 +20,8 @@
 			}
 		}
 	},
-	"tags": []
+	"tags": [
+		"scope:shared",
+		"type:nest-shared"
+	]
 }

@@ -1,0 +1,88 @@
+# Applications
+
+/apps/restaurant-owner-dashboard
+/apps/xreats-api
+
+# -----------------------------------------------------------------
+# SCOPE: restaurant-owner-dashboard
+# Contains libraries that can be consumed by
+# - apps: restaurant-owner-dashboard
+# - libs: other libs in /libs/ng/restaurant-owner-dashboard
+# -----------------------------------------------------------------
+
+/libs/ng/restaurant-owner-dashboard/feature-login
+
+# -----------------------------------------------------------------
+# SCOPE: shared
+# Contains libraries that can be consumed by
+# - apps: all angular apps
+# - libs: all angular libs
+# -----------------------------------------------------------------
+
+/libs/ng/shared
+
+# -----------------------------------------------------------------
+# SCOPE: data-access
+# Contains libraries that can be consumed by
+# - apps: all angular apps
+# - libs: other data-access libs, and feature libs
+# -----------------------------------------------------------------
+
+/libs/ng/data-access
+
+# -----------------------------------------------------------------
+# SCOPE: ui
+# Contains libraries that can be consumed by
+# - apps: all all angular apps
+# - libs: other ui libs, and feature libs
+# -----------------------------------------------------------------
+
+libs/ng/ui
+
+# -----------------------------------------------------------------
+# SCOPE: shared
+# Contains libraries that can be consumed by
+# - apps: all nest apps
+# - libs: all nest libs
+# -----------------------------------------------------------------
+
+libs/nest/shared
+
+# -----------------------------------------------------------------
+# SCOPE: auth
+# Contains libraries that can be consumed by
+# - apps: all nest apps
+# -----------------------------------------------------------------
+
+libs/nest/auth
+
+# -----------------------------------------------------------------
+# SCOPE: restaurant-owner
+# Contains libraries that can be consumed by
+# - apps: all nest apps
+# -----------------------------------------------------------------
+
+libs/nest/restaurant-owner
+
+# -----------------------------------------------------------------
+# SCOPE: bcrypt
+# Contains libraries that can be consumed by
+# - apps: all nest apps
+# - libs: auth lib, restaurant-owner lib
+# -----------------------------------------------------------------
+
+libs/nest/bcrypt
+
+
+
+
+
+
+# -----------------------------------------------------------------
+# SCOPE: shared
+# Contains libraries that can be consumed by
+# - apps: all apps
+# - libs: all libs
+# -----------------------------------------------------------------
+
+/libs/shared-models

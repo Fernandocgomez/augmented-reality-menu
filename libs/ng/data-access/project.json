@@ -21,5 +21,8 @@
 			}
 		}
 	},
-	"tags": []
+	"tags": [
+		"scope:data-access",
+		"type:ng-data-access"
+	]
 }

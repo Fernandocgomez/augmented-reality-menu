@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UiMaterialModule } from '@xreats/ui';
+import { UiMaterialModule } from '../../../material/material.module';
 
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
-	let component: HeaderComponent;
 	let fixture: ComponentFixture<HeaderComponent>;
 
 	beforeEach(async () => {
@@ -14,7 +13,6 @@ describe('HeaderComponent', () => {
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(HeaderComponent);
-		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 

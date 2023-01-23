@@ -8,6 +8,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "npx nx run-many --all --target=test",
+    "lint": "npx nx run-many --all --target=lint",
     "xreats-api": "nx serve xreats-api"
   },
   "private": true,

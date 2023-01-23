@@ -20,5 +20,8 @@
 			}
 		}
 	},
-	"tags": []
+	"tags": [
+		"scope:restaurant-owner",
+		"type:nest-feature"
+	]
 }

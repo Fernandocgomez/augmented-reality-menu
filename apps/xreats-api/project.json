@@ -56,5 +56,8 @@
 			}
 		}
 	},
-	"tags": []
+	"tags": [
+		"scope:xreats-api",
+		"type:nest-app"
+	]
 }

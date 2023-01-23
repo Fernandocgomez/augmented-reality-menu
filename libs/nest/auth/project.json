@@ -20,5 +20,8 @@
 			}
 		}
 	},
-	"tags": []
+	"tags": [
+		"scope:auth",
+		"type:nest-feature"
+	]
 }

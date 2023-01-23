@@ -15,6 +15,83 @@
               {
                 "sourceTag": "*",
                 "onlyDependOnLibsWithTags": ["*"]
+              },
+              {
+                "sourceTag": "type:ng-app",
+                "onlyDependOnLibsWithTags": [
+                  "type:ng-feature",
+                  "type:models",
+                  "type:ng-shared"
+                ]
+              },
+              {
+                "sourceTag": "type:ng-data-access",
+                "onlyDependOnLibsWithTags": [
+                  "type:ng-data-access",
+                  "type:ng-shared",
+                  "type:models"
+                ]
+              },
+              {
+                "sourceTag": "type:ng-feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:ng-data-access",
+                  "type:ng-shared",
+                  "type:ng-ui",
+                  "type:models"
+                ]
+              },
+              {
+                "sourceTag": "type:ng-shared",
+                "onlyDependOnLibsWithTags": [
+                  "type:ng-shared",
+                  "type:models"
+                ]
+              },
+              {
+                "sourceTag": "type:ng-ui",
+                "onlyDependOnLibsWithTags": [
+                  "type:ng-ui",
+                  "type:models",
+                  "type:ng-shared"
+                ]
+              },
+              {
+                "sourceTag": "type:nest-app",
+                "onlyDependOnLibsWithTags": [
+                  "type:nest-feature",
+                  "type:models",
+                  "type:nest-shared"
+                ]
+              },
+              {
+                "sourceTag": "type:nest-feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:nest-util",
+                  "type:nest-shared",
+                  "type:models"
+                ]
+              },
+              {
+                "sourceTag": "type:nest-shared",
+                "onlyDependOnLibsWithTags": [
+                  "type:nest-shared",
+                  "type:models"
+                ]
+              },
+              {
+                "sourceTag": "type:nest-util",
+                "onlyDependOnLibsWithTags": [
+                  "type:nest-util",
+                  "type:models",
+                  "type:nest-shared"
+                ]
+              },
+              {
+                "sourceTag": "type:models",
+                "onlyDependOnLibsWithTags": [
+                  "type:models"
+                ]
               }
             ]
           }
