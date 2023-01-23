@@ -5,7 +5,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AuthGuard, DataAccessAuthModule } from '@xreats/ng/data-access';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,11 +32,7 @@ import { AppComponent } from './app.component';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    DataAccessAuthModule
   ],
   bootstrap: [AppComponent],
-  providers: [
-    AuthGuard
-  ],
 })
 export class AppModule {}

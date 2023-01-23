@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UiMaterialModule } from '@xreats/ui';
+import { UiMaterialModule } from '../../../material/material.module';
 
 import { DangerAlertComponent } from './danger-alert.component';
 

@@ -1,11 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UiMaterialModule } from '@xreats/ui';
+import { UiMaterialModule } from '../../../material/material.module';
 
 import { FooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {
-	let component: FooterComponent;
 	let fixture: ComponentFixture<FooterComponent>;
 
 	beforeEach(async () => {
@@ -15,7 +14,6 @@ describe('FooterComponent', () => {
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(FooterComponent);
-		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 

@@ -96,5 +96,8 @@
 			}
 		}
 	},
-	"tags": []
+	"tags": [
+		"scope:restaurant-owner-dashboard",
+		"type:ng-app"
+	]
 }
