@@ -4,16 +4,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
+import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ConfigAppInitializer } from '@xreats/ng/shared';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(
@@ -32,6 +34,10 @@ import { AppComponent } from './app.component';
       maxAge: 25,
       logOnly: environment.production,
     }),
+    HttpClientModule
+  ],
+  providers: [
+    ConfigAppInitializer
   ],
   bootstrap: [AppComponent],
 })
