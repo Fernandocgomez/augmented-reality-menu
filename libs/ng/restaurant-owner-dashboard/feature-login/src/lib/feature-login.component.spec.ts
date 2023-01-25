@@ -8,7 +8,6 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { FeatureLoginComponent } from './feature-login.component';
 
 describe('FeatureLoginComponent', () => {
-	let component: FeatureLoginComponent;
 	let fixture: ComponentFixture<FeatureLoginComponent>;
 
 	beforeEach(async () => {
@@ -18,16 +17,15 @@ describe('FeatureLoginComponent', () => {
 				MockComponent(LoginFormComponent)
 			],
 			imports: [
-				NoopAnimationsModule, 
-				FormsModule, 
+				NoopAnimationsModule,
+				FormsModule,
 				ReactiveFormsModule,
-				UiMaterialModule, 
-				UiNavigationModule, 
+				UiMaterialModule,
+				UiNavigationModule,
 				UiAlertModule],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(FeatureLoginComponent);
-		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
